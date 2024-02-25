@@ -33,7 +33,9 @@ public class Proyecto1 {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        Inicio inicio=new Inicio();
+       
+       // Inicio inicio=new Inicio();
+        Registro registro=new Registro();
         
 
         

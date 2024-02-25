@@ -71,9 +71,9 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
         btnLogin.addActionListener(this); // Agregamos un ActionListener al botón
         this.add(btnLogin);
         
+       
         
-        
-        JLabel lblpregunta=new JLabel("¿Sin cuenta aun?");
+        JLabel lblpregunta=new JLabel("¿Sin cuenta aún?");
         lblpregunta.setFont(new Font("Arial", Font.BOLD, 12)); // Establece el tipo de letra y el tamaño
         lblpregunta.setBounds(130, 310, 120, 25);
         this.add(lblpregunta);
@@ -114,6 +114,7 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
         }else if(fe.getSource()==areacontraseña){
             areacontraseña.setForeground(Color.BLACK);
             areacontraseña.setText("");
+            areacontraseña.setEchoChar(('\u25CF'));
         }
     }
 
@@ -136,8 +137,12 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
             String nombreUsuario=usuariotxt.getText();
             char[] contraseña=areacontraseña.getPassword();
             String contra=new String(contraseña);
-            
         }
+        if(ae.getSource()==registerButton){
+            Registro registro=new Registro();
+            this.dispose();
+        }
+        
         
     }
     
