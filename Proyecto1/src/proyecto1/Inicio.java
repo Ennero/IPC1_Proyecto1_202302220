@@ -24,6 +24,9 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
         start();
     }
     
+    private int u=0;
+    private int c=0;
+    
     private void start(){
         JLabel titulo = new JLabel("Inicio de sesión");//Label del inicio de sesión
         titulo.setFont(new Font("Arial", Font.BOLD, 30));
@@ -104,14 +107,18 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
         this.setResizable(false);  // No permite redimensionar la ventana
         this.setVisible(true); // Hace visible la ventana
         
+        
     }
     
     @Override
     public void focusGained(FocusEvent fe) {
-        if(fe.getSource()==usuariotxt){
+
+        if(fe.getSource()==usuariotxt && u==0){
+            u=1;
             usuariotxt.setText("");
             usuariotxt.setForeground(Color.BLACK);
-        }else if(fe.getSource()==areacontraseña){
+        }else if(fe.getSource()==areacontraseña && c==0){
+            c=1;
             areacontraseña.setForeground(Color.BLACK);
             areacontraseña.setText("");
             areacontraseña.setEchoChar(('\u25CF'));
@@ -137,11 +144,17 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
             String nombreUsuario=usuariotxt.getText();
             char[] contraseña=areacontraseña.getPassword();
             String contra=new String(contraseña);
-        }
+            if(nombreUsuario.equals("202302220") && contra.equals("proyecto1IPC1")){
+                
+            }
+            
+        }else
         if(ae.getSource()==registerButton){
             Registro registro=new Registro();
             this.dispose();
+            
         }
+        
         
         
     }
