@@ -32,22 +32,17 @@ public class Proyecto1 {
     
     
     public static void main(String[] args) {
-        ActualizarDatos a=new ActualizarDatos();
-        
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-       // Inicio inicio=new Inicio();
-        //Admin registro=new Admin();
+       //ActualizarDatos a=new ActualizarDatos();
+       //Inicio inicio=new Inicio();
+        Admin registro=new Admin();
         
 
-        for(int i=0;i<pacientes.size();i++){
-            System.out.println(pacientes.get(i).getApellidos());
-            
-        }
+
         
         
         

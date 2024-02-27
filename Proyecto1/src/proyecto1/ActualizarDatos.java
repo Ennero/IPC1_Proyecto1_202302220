@@ -25,7 +25,14 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
     private int o=0;
     
     
-    public ActualizarDatos() throws HeadlessException {
+    public ActualizarDatos(){
+        
+        JLabel codigo=new JLabel("Código:" + Proyecto1.pacientes.get(Proyecto1.posicion).getCodigo());//Da error si se incia directamente porque no se ingresa codigo
+        codigo.setBounds(30,55,85,30);
+        codigo.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
+        this.add(codigo);
+        codigo.setForeground(Color.GREEN);
+        
         JLabel titulolbl=new JLabel("Actualizar Datos");
         titulolbl.setBounds(45,15,370,45);
         titulolbl.setFont(new Font("Arial", Font.BOLD, 37));
@@ -101,8 +108,6 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
         this.add(actualizar);
         
                 
-                
-                
         this.setTitle("Actualización de datos");  // Título de la ventana
         this.setLocationRelativeTo(null);
         this.setSize(400, 500);
@@ -111,14 +116,8 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
         this.setLayout(null); // Diseño nulo (sin diseño predeterminado), para poder posicionar los componentes donde queramos
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra la aplicación al cerrar la ventana
         this.setResizable(false);  // No permite redimensionar la ventana
-        this.setVisible(true); // Hace visible la ventana
-    
-        
-        
+        this.setVisible(true); // Hace visible la ventana 
     }
-    
-    
-     
 
     @Override
     public void focusGained(FocusEvent fe) {
@@ -147,7 +146,6 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
             
         }
         
-
     }
 
     @Override
@@ -176,11 +174,7 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
             Proyecto1.pacientes.get(Proyecto1.posicion).setEdad(edad);
             Proyecto1.pacientes.get(Proyecto1.posicion).setSexo(genero);
             Proyecto1.pacientes.get(Proyecto1.posicion).setContraseña(password);
-            
-            
-            Proyecto1.codigo++;
-            
-
+            Admin admin=new Admin();
             this.dispose();
         }
 

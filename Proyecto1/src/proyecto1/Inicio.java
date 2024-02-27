@@ -148,6 +148,7 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
             String contra=new String(contraseña);
             if(nombreUsuario.equals("202302220") && contra.equals("proyecto1IPC1")){
                 Admin admin=new Admin();
+                this.dispose();
             }
             
         }else

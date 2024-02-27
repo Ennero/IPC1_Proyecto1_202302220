@@ -153,18 +153,29 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         if(ae.getSource()==btnp1){
             Proyecto1.registrop=true;
             Registro registro=new Registro();
+            this.dispose();
         }
         if(ae.getSource()==btnp2){
             String codigo= JOptionPane.showInputDialog("Ingrese el código del paciente");
             Proyecto1.buscarp(codigo);
             if(Proyecto1.found==true){
                 ActualizarDatos act=new ActualizarDatos();
+                this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigo,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
             }
-            
         }
-        
+        if(ae.getSource()==btnp3){
+            String codigo=JOptionPane.showInputDialog("Ingrese el código del paciente");
+            Proyecto1.buscarp(codigo);
+            if(Proyecto1.found==true){
+                Proyecto1.pacientes.remove(Proyecto1.posicion);
+                Admin aa=new Admin();
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigo,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
 
     }
 
