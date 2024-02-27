@@ -1,5 +1,6 @@
 
 package proyecto1;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,30 +12,25 @@ import java.awt.event.FocusListener;
  *
  * @author Enner
  */
-public class ActualizarDatos extends JFrame implements FocusListener,ActionListener {
-
-    private JTextField nombretxt,apellidotxt,edadtxt;
+public class RegistroDoctores extends JFrame implements FocusListener,ActionListener {
+    
+    private JTextField nombretxt,apellidotxt,edadtxt,telefonotxt;
     private JPasswordField contraseñatxt;
-    private JComboBox<String> sexo;
+    private JComboBox<String> sexo,especialidad;
     private JCheckBox contra;
-    private JButton actualizar;
+    private JButton registrar;
     
     private int a=0;
     private int e=0;
     private int i=0;
     private int o=0;
-    
-    
-    public ActualizarDatos(){
+    private int u=0;
+    private int q=0;
+
+    public RegistroDoctores() {
         
-        JLabel codigo=new JLabel("Código: " + Proyecto1.pacientes.get(Proyecto1.posicion).getCodigo());//Da error si se incia directamente porque no se ingresa codigo
-        codigo.setBounds(30,55,120,30);
-        codigo.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
-        this.add(codigo);
-        codigo.setForeground(Color.GREEN);
-        
-        JLabel titulolbl=new JLabel("Actualizar Datos");
-        titulolbl.setBounds(45,15,370,45);
+        JLabel titulolbl=new JLabel("Registro de Doctores");
+        titulolbl.setBounds(10,15,390,45);
         titulolbl.setFont(new Font("Arial", Font.BOLD, 37));
         this.add(titulolbl);
         
@@ -80,13 +76,13 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
         this.add(contraseñatxt);
         
         JLabel sexolbl=new JLabel("Sexo:");
-        sexolbl.setBounds(30,235,100,25);
+        sexolbl.setBounds(30,235,110,25);
         sexolbl.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
         this.add(sexolbl);
         
         String[] sexos = {"Terreneitor","Masculino","Femenino"};
         sexo=new JComboBox<>(sexos);
-        sexo.setBounds(146, 235, 110, 30);
+        sexo.setBounds(146, 235, 110, 25);
         this.add(sexo);
         
         JLabel edadlbl=new JLabel("Edad:");
@@ -100,15 +96,38 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
         edadtxt.setForeground(Color.gray);
         this.add(edadtxt);
         
-        actualizar=new JButton("Actualizar");
-        actualizar.setBounds(45, 330, 300, 100); //Ajuste de posición
-        actualizar.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
-        actualizar.setFont(new Font("Arial",Font.BOLD,45));
-        actualizar.addActionListener(this); // Agregamos un ActionListener al botón
-        this.add(actualizar);
+        JLabel especialidadlbl=new JLabel("Especialidad:");
+        especialidadlbl.setBounds(30, 330, 110, 20);
+        especialidadlbl.setFont(new Font("Arial", Font.CENTER_BASELINE,17));
+        this.add(especialidadlbl);
+        
+        String[] especialidade = {"Dermatología","Neurología","Infectología","Radiología","Oftalmología"};
+        especialidad=new JComboBox<>(especialidade);
+        especialidad.setBounds(146, 330, 110, 25);
+        this.add(especialidad);
+        
+        JLabel telefonolbl=new JLabel("Telefono: ");
+        telefonolbl.setBounds(30, 380, 110, 20);
+        telefonolbl.setFont(new Font("Arial", Font.CENTER_BASELINE,17));
+        this.add(telefonolbl);
+        
+        telefonotxt=new JTextField ("Ingrese el telefono aquí");
+        telefonotxt.setBounds(146,380,180,27);
+        telefonotxt.addFocusListener(this);
+        telefonotxt.setForeground(Color.gray);
+        this.add(telefonotxt);
+        
+        registrar=new JButton("Registrar");
+        registrar.setBounds(125, 425, 150, 35); //Ajuste de posición
+        registrar.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
+        registrar.setFont(new Font("Arial",Font.BOLD,20));
+        registrar.addActionListener(this); // Agregamos un ActionListener al botón
+        this.add(registrar);
         
                 
-        this.setTitle("Actualización de datos");  // Título de la ventana
+                
+                
+        this.setTitle("Registro de Doctores");  // Título de la ventana
         this.setLocationRelativeTo(null);
         this.setSize(400, 500);
         setLocationRelativeTo(null);
@@ -116,8 +135,15 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
         this.setLayout(null); // Diseño nulo (sin diseño predeterminado), para poder posicionar los componentes donde queramos
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra la aplicación al cerrar la ventana
         this.setResizable(false);  // No permite redimensionar la ventana
-        this.setVisible(true); // Hace visible la ventana 
+        this.setVisible(true); // Hace visible la ventana
+        
+        
+        
+        
+        
+        
     }
+    
 
     @Override
     public void focusGained(FocusEvent fe) {
@@ -143,13 +169,23 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
             contraseñatxt.setText("");
             contraseñatxt.setForeground(Color.BLACK);
             contraseñatxt.setEchoChar('\u25CF');
+        }
+        if (fe.getSource()==telefonotxt && u==0){
+            u++;
+            telefonotxt.setText("");
+            telefonotxt.setForeground(Color.BLACK);
             
         }
         
+
+
+
     }
 
     @Override
     public void focusLost(FocusEvent e) {
+
+
 
     }
 
@@ -162,32 +198,29 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
                 contraseñatxt.setEchoChar(('\u25CF'));
             }
         }
-        if(ae.getSource()==actualizar){
+        if(ae.getSource()==registrar){
             char[] contraseñita=contraseñatxt.getPassword();
             String password=new String(contraseñita);
             String nombre=nombretxt.getText();
             String apellidos=apellidotxt.getText();
             String edad=edadtxt.getText();
             String genero=(String)sexo.getSelectedItem();
-            Proyecto1.pacientes.get(Proyecto1.posicion).setApellidos(apellidos);
-            Proyecto1.pacientes.get(Proyecto1.posicion).setNombres(nombre);
-            Proyecto1.pacientes.get(Proyecto1.posicion).setEdad(edad);
-            Proyecto1.pacientes.get(Proyecto1.posicion).setSexo(genero);
-            Proyecto1.pacientes.get(Proyecto1.posicion).setContraseña(password);
-            Admin admin=new Admin();
+            String codigo=String.valueOf(Proyecto1.codigo);
+            String especialización=(String)especialidad.getSelectedItem();
+            String telefono=telefonotxt.getText();
+            Proyecto1.nuevaCuentaDoctor(nombre, apellidos, password, edad, genero, codigo,especialización,telefono);
+            JOptionPane.showMessageDialog(null, "Su código de acceso es: " + codigo,"Registro completo",JOptionPane.INFORMATION_MESSAGE);
+            Proyecto1.codigo++;
+            if(Proyecto1.registro==true){
+              Admin admin=new Admin();
+            }else{
+              Inicio inicio=new Inicio();
+            }
             this.dispose();
         }
 
+
+
     }
-
-    
-    
-    
-    
-    
-
-    
-    
-    
     
 }

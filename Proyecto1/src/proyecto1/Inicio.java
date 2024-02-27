@@ -154,7 +154,7 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
         }else
         if(ae.getSource()==registerButton){
             Registro registro=new Registro();
-            Proyecto1.registrop=false;
+            Proyecto1.registro=false;
             this.dispose();
         }
         

@@ -109,7 +109,7 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
                 
                 
                 
-        this.setTitle("Registro");  // Título de la ventana
+        this.setTitle("Registro de Pacientes");  // Título de la ventana
         this.setLocationRelativeTo(null);
         this.setSize(400, 500);
         setLocationRelativeTo(null);
@@ -174,7 +174,7 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
             Proyecto1.nuevaCuenta(nombre, apellidos, password, edad, genero, codigo);
             JOptionPane.showMessageDialog(null, "Su código de acceso es: " + codigo,"Registro completo",JOptionPane.INFORMATION_MESSAGE);
             Proyecto1.codigo++;
-            if(Proyecto1.registrop==true){
+            if(Proyecto1.registro==true){
               Admin admin=new Admin();
             }else{
               Inicio inicio=new Inicio();

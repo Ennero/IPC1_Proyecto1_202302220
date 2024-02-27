@@ -70,7 +70,8 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         btnd3.setBounds(890,150,150,30);
         btnd3.addActionListener(this);
         p1.add(btnd3);
-        
+        //********************************************************************************************************************************************
+        //Lo de la pestaña de doctores
         titulodlbl = new JLabel("Listado de doctores");
         titulodlbl.setBounds(45, 25, 750, 50);
         titulodlbl.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -85,6 +86,24 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         titulodlbl.setFont(font.deriveFont(attributes));
         titulodlbl.setVisible(true);
         p1.add(titulodlbl);
+        
+        btnd1=new JButton("Crear Doctor");
+        btnd1.setBounds(890,50,150,30);
+        btnd1.addActionListener(this);
+        p1.add(btnd1);
+        
+        btnd2=new JButton("Actualizar Doctor");
+        btnd2.setBounds(890,100,150,30);
+        btnd2.addActionListener(this);
+        p1.add(btnd2);
+        
+        btnd3=new JButton("Eliminar Doctor");
+        btnd3.setBounds(890,150,150,30);
+        btnd3.addActionListener(this);
+        p1.add(btnd3);
+        
+        
+               
         
         
         
@@ -134,9 +153,8 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         sp2.setBounds(45, 80, 750, 570);
         sp2.setVisible(true);
         p2.add(sp2);
-        
-        
-        
+                
+        //*******************************************************************************************************************************************
         this.setTitle("Administrador");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -150,8 +168,38 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
     
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //********************************************************************************************************************************/////
+        //Lo de los lindos doctores
+        if(ae.getSource()==btnd1){
+            Proyecto1.registro=true;
+            RegistroDoctores registros=new RegistroDoctores();
+            this.dispose();
+        }
+        if(ae.getSource()==btnd2){
+            String codigod= JOptionPane.showInputDialog("Ingrese el código del Doctor");
+            Proyecto1.buscarp(codigod);
+            if(Proyecto1.found==true){
+                ActualizarDatos act=new ActualizarDatos();
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigod,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        if(ae.getSource()==btnd3){
+            String codigo=JOptionPane.showInputDialog("Ingrese el código del paciente");
+            Proyecto1.buscarp(codigo);
+            if(Proyecto1.found==true){
+                Proyecto1.doctores.remove(Proyecto1.posicion);
+                Admin aes=new Admin();
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigo,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        
+        //***********************************************************************************************************************************************
         if(ae.getSource()==btnp1){
-            Proyecto1.registrop=true;
+            Proyecto1.registro=true;//Se pode true para que regrese a admin después o, sino, regrese al inicio
             Registro registro=new Registro();
             this.dispose();
         }
@@ -170,13 +218,14 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             Proyecto1.buscarp(codigo);
             if(Proyecto1.found==true){
                 Proyecto1.pacientes.remove(Proyecto1.posicion);
+                JOptionPane.showMessageDialog(null, "Paciente eliminado exitosamente" + codigo,"Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
                 Admin aa=new Admin();
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigo,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
             }
         }
-
+//*******************************************************************************************************************************************************
     }
 
     @Override

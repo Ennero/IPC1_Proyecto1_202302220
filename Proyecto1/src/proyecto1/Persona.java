@@ -10,7 +10,7 @@ package proyecto1;
  */
 public class Persona {
 
-    private String nombres, apellidos, contraseña, codigo,edad, sexo;
+    private String nombres, apellidos, contraseña, codigo,edad, sexo,horarios;
 
     public Persona(String nombres, String apellidos, String contraseña, String edad, String sexo, String codigo) {
         this.nombres = nombres;
