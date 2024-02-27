@@ -1,11 +1,5 @@
 
 package proyecto1;
-
-/**
- *
- * @author Enner
- */
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,17 +7,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class Registro extends JFrame implements FocusListener,ActionListener {
-    
+/**
+ *
+ * @author Enner
+ */
+public class ActualizarDatos extends JFrame implements FocusListener,ActionListener {
+
     private JTextField nombretxt,apellidotxt,edadtxt;
     private JPasswordField contraseñatxt;
     private JComboBox<String> sexo;
     private JCheckBox contra;
-    private JButton registrar;
-    
-    public Registro(){
-        inicio();
-    }
+    private JButton actualizar;
     
     private int a=0;
     private int e=0;
@@ -31,9 +25,9 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
     private int o=0;
     
     
-    private void inicio(){
-        JLabel titulolbl=new JLabel("Registro de Paciente");
-        titulolbl.setBounds(15,15,370,45);
+    public ActualizarDatos() throws HeadlessException {
+        JLabel titulolbl=new JLabel("Actualizar Datos");
+        titulolbl.setBounds(45,15,370,45);
         titulolbl.setFont(new Font("Arial", Font.BOLD, 37));
         this.add(titulolbl);
         
@@ -79,13 +73,13 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
         this.add(contraseñatxt);
         
         JLabel sexolbl=new JLabel("Sexo:");
-        sexolbl.setBounds(30,235,110,25);
+        sexolbl.setBounds(30,235,100,25);
         sexolbl.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
         this.add(sexolbl);
         
         String[] sexos = {"Terreneitor","Masculino","Femenino"};
         sexo=new JComboBox<>(sexos);
-        sexo.setBounds(146, 235, 110, 25);
+        sexo.setBounds(146, 235, 110, 30);
         this.add(sexo);
         
         JLabel edadlbl=new JLabel("Edad:");
@@ -99,17 +93,17 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
         edadtxt.setForeground(Color.gray);
         this.add(edadtxt);
         
-        registrar=new JButton("Registrar");
-        registrar.setBounds(45, 330, 300, 100); //Ajuste de posición
-        registrar.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
-        registrar.setFont(new Font("Arial",Font.BOLD,45));
-        registrar.addActionListener(this); // Agregamos un ActionListener al botón
-        this.add(registrar);
+        actualizar=new JButton("Actualizar");
+        actualizar.setBounds(45, 330, 300, 100); //Ajuste de posición
+        actualizar.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
+        actualizar.setFont(new Font("Arial",Font.BOLD,45));
+        actualizar.addActionListener(this); // Agregamos un ActionListener al botón
+        this.add(actualizar);
         
                 
                 
                 
-        this.setTitle("Registro");  // Título de la ventana
+        this.setTitle("Actualización de datos");  // Título de la ventana
         this.setLocationRelativeTo(null);
         this.setSize(400, 500);
         setLocationRelativeTo(null);
@@ -118,8 +112,13 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra la aplicación al cerrar la ventana
         this.setResizable(false);  // No permite redimensionar la ventana
         this.setVisible(true); // Hace visible la ventana
+    
+        
+        
     }
     
+    
+     
 
     @Override
     public void focusGained(FocusEvent fe) {
@@ -148,10 +147,12 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
             
         }
         
+
     }
 
     @Override
     public void focusLost(FocusEvent e) {
+
     }
 
     @Override
@@ -163,27 +164,34 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
                 contraseñatxt.setEchoChar(('\u25CF'));
             }
         }
-        if(ae.getSource()==registrar){
+        if(ae.getSource()==actualizar){
             char[] contraseñita=contraseñatxt.getPassword();
             String password=new String(contraseñita);
             String nombre=nombretxt.getText();
             String apellidos=apellidotxt.getText();
             String edad=edadtxt.getText();
             String genero=(String)sexo.getSelectedItem();
-            String codigo=String.valueOf(Proyecto1.codigo);
-            Proyecto1.nuevaCuenta(nombre, apellidos, password, edad, genero, codigo);
-            JOptionPane.showMessageDialog(null, "Su código de acceso es: " + codigo,"Registro completo",JOptionPane.INFORMATION_MESSAGE);
+            Proyecto1.pacientes.get(Proyecto1.posicion).setApellidos(apellidos);
+            Proyecto1.pacientes.get(Proyecto1.posicion).setNombres(nombre);
+            Proyecto1.pacientes.get(Proyecto1.posicion).setEdad(edad);
+            Proyecto1.pacientes.get(Proyecto1.posicion).setSexo(genero);
+            Proyecto1.pacientes.get(Proyecto1.posicion).setContraseña(password);
+            
+            
             Proyecto1.codigo++;
-            if(Proyecto1.registrop==true){
-              Admin admin=new Admin();
-            }else{
-              Inicio inicio=new Inicio();
-            }
+            
 
             this.dispose();
         }
+
     }
+
     
+    
+    
+    
+    
+
     
     
     

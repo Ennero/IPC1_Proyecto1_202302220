@@ -123,6 +123,8 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
             areacontraseña.setText("");
             areacontraseña.setEchoChar(('\u25CF'));
         }
+        
+        
     }
 
     @Override
@@ -145,14 +147,14 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
             char[] contraseña=areacontraseña.getPassword();
             String contra=new String(contraseña);
             if(nombreUsuario.equals("202302220") && contra.equals("proyecto1IPC1")){
-                
+                Admin admin=new Admin();
             }
             
         }else
         if(ae.getSource()==registerButton){
             Registro registro=new Registro();
+            Proyecto1.registrop=false;
             this.dispose();
-            
         }
         
         
