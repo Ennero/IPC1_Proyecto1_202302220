@@ -39,8 +39,8 @@ public class Proyecto1 {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
        //ActualizarDatos a=new ActualizarDatos();
-      Inicio inicio=new Inicio();
-       // Admin registro=new Admin();
+      //Inicio inicio=new Inicio();
+        Admin registro=new Admin();
        // RegistroDoctores a=new RegistroDoctores();
 
 
@@ -62,7 +62,7 @@ public class Proyecto1 {
         return tableado;
     }
     public static Object[][] tablearD() {
-        int filas = pacientes.size();
+        int filas = doctores.size();
         Object[][] tableado = new Object[filas][7];
         for (int i = 0; i < filas; i++) {
             tableado[i][0] = doctores.get(i).getNombres();
@@ -77,6 +77,21 @@ public class Proyecto1 {
     }
     static int posicion=0;
     static boolean found;
+    
+    public static void buscard(String codigo){
+        int encontrado=0;
+        for(int j=0;j<doctores.size();j++){
+            if(codigo.equals(doctores.get(j).getCodigo())){
+                encontrado=j;
+                found=true;
+                break;
+            }else{
+                found=false;
+            }
+        }
+        posicion=encontrado;
+    }
+    
     public static void buscarp(String codigo){
         int encontrado=0;
         for(int i=0;i<pacientes.size();i++){
@@ -103,27 +118,44 @@ public class Proyecto1 {
         }
         posicion=encontrado;
     }
+    public static int derma;
+    public static int neuro;
+    public static int infect;
+    public static int radio;
+    public static int ofta;
     
-    public static void buscard(String codigo){
-        int encontrado=0;
-        for(int i=0;i<pacientes.size();i++){
-            if(codigo.equals(pacientes.get(i).getCodigo())){            
-            encontrado=i;
-            found=true;
-            break;
-            }else{
-                found=false;//No recordar nada xd
-            }
-        }
-        posicion=encontrado;
+    public static void cuenta(){
+        derma=0;
+        neuro=0;
+        infect=0;
+        ofta=0;
+        radio=0;
+        for(int i=0;i<doctores.size();i++){
+        if("Dermatología".equals(doctores.get(i).getEspecialidad())){            
+            derma++;
+           }
+        if("Neurología".equals(doctores.get(i).getEspecialidad())){            
+            neuro++;
+           }
+        if("Infectología".equals(doctores.get(i).getEspecialidad())){            
+            infect++;
+           }
+        if("Radiología".equals(doctores.get(i).getEspecialidad())){            
+            radio++;
+           }
+        if("Oftalmología".equals(doctores.get(i).getEspecialidad())){            
+            ofta++;
+           }
     }
+    }
+    
     
     static void nuevaCuenta(String nombres,String apellidos,String contraseña,String edad,String genero,String codigo){
         pacientes.add(new Persona(nombres,apellidos,contraseña,edad,genero,codigo));
     }
     
     static void nuevaCuentaDoctor(String nombres,String apellidos,String contraseña,String edad,String genero,String codigo,String especialidad, String telefono){
-        pacientes.add(new Doctor(nombres,apellidos,contraseña,edad,genero,codigo,especialidad,telefono));
+        doctores.add(new Doctor(nombres,apellidos,contraseña,edad,genero,codigo,especialidad,telefono));
     }
     
 }

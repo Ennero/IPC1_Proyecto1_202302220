@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package proyecto1;
 import java.awt.Color;
 import java.awt.Component;
@@ -21,6 +18,13 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+
 
 /**
  *
@@ -30,7 +34,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
 
     JLabel titulodlbl, tituloplbl, titulomlbl;
     // JButton hace referencia a los botones
-    JButton btnd1, btnd2, btnd3, btnp1, btnp2, btnp3, btn7, btn8, btn9, btn10, btn11, btn12;
+    JButton btnd1, btnd2, btnd3, btnp1, btnp2, btnp3, btn9, btn10, btn11, btn12;
     //JTabbedPane	
     JTabbedPane panel;
     //JPanels
@@ -41,7 +45,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
     
     
     public Admin() throws HeadlessException {
-        
+        Proyecto1.cuenta();
         panel=new JTabbedPane(JTabbedPane.TOP);
         p1=new JPanel(null);
         panel.addTab("Doctores",p1);
@@ -55,22 +59,6 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         panel.addTab("Volver",p4);
         panel.addChangeListener(this);
         //**********************************************************************************************************************************************
-        //Lo de la pestaña de doctores
-        btnd1=new JButton("Crear Doctor");
-        btnd1.setBounds(890,50,150,30);
-        btnd1.addActionListener(this);
-        p1.add(btnd1);
-        
-        btnd2=new JButton("Actualizar Doctor");
-        btnd2.setBounds(890,100,150,30);
-        btnd2.addActionListener(this);
-        p1.add(btnd2);
-        
-        btnd3=new JButton("Eliminar Doctor");
-        btnd3.setBounds(890,150,150,30);
-        btnd3.addActionListener(this);
-        p1.add(btnd3);
-        //********************************************************************************************************************************************
         //Lo de la pestaña de doctores
         titulodlbl = new JLabel("Listado de doctores");
         titulodlbl.setBounds(45, 25, 750, 50);
@@ -102,9 +90,30 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         btnd3.addActionListener(this);
         p1.add(btnd3);
         
+        String[] titulos_d = {"Nombres", "Apellidos", "Edad", "Sexo", "Código","Especialidad","Teléfono"};
+        tablaDoctores = new JTable(Proyecto1.tablearD(), titulos_d);
+        DefaultTableCellRenderer Alineard = new DefaultTableCellRenderer();
+        Alineard.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < titulos_d.length; i++) {
+            tablaDoctores.getColumnModel().getColumn(i).setCellRenderer(Alineard);
+        }
+        tablaDoctores.setEnabled(false);
+
+        sp1 = new JScrollPane(tablaDoctores);
+        sp1.setBounds(45, 80, 750, 570);
+        sp1.setVisible(true);
+        p1.add(sp1);
         
-               
-        
+        DefaultCategoryDataset datos=new DefaultCategoryDataset();
+        datos.addValue(Proyecto1.derma,"Especialidades","Dermatología");
+        datos.addValue(Proyecto1.neuro, "Especialidades", "Neurología");
+        datos.addValue(Proyecto1.infect, "Especialidades", "Infectología");
+        datos.addValue(Proyecto1.ofta, "Especialdiades", "Oftamología");
+        datos.addValue(Proyecto1.radio, "Especialidades", "Radiología");
+        JFreeChart grafica=ChartFactory.createBarChart("Especialidades","Especialidad","",datos,PlotOrientation.VERTICAL,false,true,false);
+        ChartPanel pana=new ChartPanel(grafica);
+        p1.add(pana);
+        pana.setBounds(815, 250, 360, 300);
         
         
         //********************************************************************************************************************************************
@@ -172,22 +181,22 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         //Lo de los lindos doctores
         if(ae.getSource()==btnd1){
             Proyecto1.registro=true;
-            RegistroDoctores registros=new RegistroDoctores();
+            RegistroDoctores registroD=new RegistroDoctores();
             this.dispose();
         }
         if(ae.getSource()==btnd2){
             String codigod= JOptionPane.showInputDialog("Ingrese el código del Doctor");
-            Proyecto1.buscarp(codigod);
+            Proyecto1.buscard (codigod);
             if(Proyecto1.found==true){
-                ActualizarDatos act=new ActualizarDatos();
+                ActualizarDoctores acti=new ActualizarDoctores();
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigod,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se encontró el código " + codigod+ " dentro del listado de doctores","Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
             }
         }
         if(ae.getSource()==btnd3){
-            String codigo=JOptionPane.showInputDialog("Ingrese el código del paciente");
-            Proyecto1.buscarp(codigo);
+            String codigo=JOptionPane.showInputDialog("Ingrese el código del Doctor");
+            Proyecto1.buscard(codigo);
             if(Proyecto1.found==true){
                 Proyecto1.doctores.remove(Proyecto1.posicion);
                 Admin aes=new Admin();
@@ -210,7 +219,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
                 ActualizarDatos act=new ActualizarDatos();
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigo,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se encontró el código " + codigo + " dentro del listado de pacientes","Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
             }
         }
         if(ae.getSource()==btnp3){
@@ -232,6 +241,8 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
     public void stateChanged(ChangeEvent e) {
 
     }
+    
+    
     
     
 }
