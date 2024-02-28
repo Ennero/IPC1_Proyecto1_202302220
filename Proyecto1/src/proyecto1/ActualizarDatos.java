@@ -174,6 +174,7 @@ public class ActualizarDatos extends JFrame implements FocusListener,ActionListe
             Proyecto1.pacientes.get(Proyecto1.posicion).setEdad(edad);
             Proyecto1.pacientes.get(Proyecto1.posicion).setSexo(genero);
             Proyecto1.pacientes.get(Proyecto1.posicion).setContraseña(password);
+            JOptionPane.showMessageDialog(null, "Actualizado exitosamente","Proceso exitoso",JOptionPane.INFORMATION_MESSAGE);
             Admin admin=new Admin();
             this.dispose();
         }

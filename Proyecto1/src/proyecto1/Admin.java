@@ -34,13 +34,13 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
 
     JLabel titulodlbl, tituloplbl, titulomlbl;
     // JButton hace referencia a los botones
-    JButton btnd1, btnd2, btnd3, btnp1, btnp2, btnp3, btn9, btn10, btn11, btn12;
+    JButton btnd1, btnd2, btnd3, btnp1, btnp2, btnp3, btnm1, btnm2, btnm3;
     //JTabbedPane	
     JTabbedPane panel;
     //JPanels
     JPanel p1, p2, p3, p4;
     //Atributos para la tabla
-    JTable tablaPacientes,tablaDoctores, tablaMedicinas;
+    JTable tablaPacientes,tablaDoctores, tablaProductos;
     JScrollPane sp1,sp2,sp3;
     
     
@@ -110,7 +110,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         datos.addValue(Proyecto1.infect, "Especialidades", "Infectología");
         datos.addValue(Proyecto1.ofta, "Especialdiades", "Oftamología");
         datos.addValue(Proyecto1.radio, "Especialidades", "Radiología");
-        JFreeChart grafica=ChartFactory.createBarChart("Especialidades","Especialidad","",datos,PlotOrientation.VERTICAL,false,true,false);
+        JFreeChart grafica=ChartFactory.createBarChart("Top 5 Especialidades","Especialidad","",datos,PlotOrientation.VERTICAL,false,true,false);
         ChartPanel pana=new ChartPanel(grafica);
         p1.add(pana);
         pana.setBounds(815, 250, 360, 300);
@@ -162,6 +162,64 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         sp2.setBounds(45, 80, 750, 570);
         sp2.setVisible(true);
         p2.add(sp2);
+        
+        //******************************************************************************************************************************************
+        //Lo de las medicinas
+        titulomlbl = new JLabel("Listado de Productos");
+        titulomlbl.setBounds(45, 25, 750, 50);
+        titulomlbl.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        this.titulomlbl.setBackground(Color.LIGHT_GRAY);
+        this.titulomlbl.setOpaque(true);
+        titulomlbl.setVerticalAlignment(SwingConstants.CENTER);
+        titulomlbl.setHorizontalAlignment(SwingConstants.CENTER);
+        titulomlbl.setFont(new Font(titulomlbl.getFont().getFontName(), Font.BOLD, 24));
+        Font font3 = titulomlbl.getFont();
+        Map attributes3 = font3.getAttributes();
+        attributes3.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        titulomlbl.setFont(font.deriveFont(attributes2));
+        titulomlbl.setVisible(true);
+        p3.add(titulomlbl);
+        
+        btnm1=new JButton("Añadir Producto");
+        btnm1.setBounds(890,50,150,30);
+        btnm1.addActionListener(this);
+        p3.add(btnm1);
+        
+        btnm2=new JButton("Actualizar Producto");
+        btnm2.setBounds(890,100,150,30);
+        btnm2.addActionListener(this);
+        p3.add(btnm2);
+        
+        btnm3=new JButton("Eliminar Producto");
+        btnm3.setBounds(890,150,150,30);
+        btnm3.addActionListener(this);
+        p3.add(btnm3);
+        
+        String[] titulos_M = {"Codigo", "Nombre", "Cantidad", "Descripción", "Precio"};
+        tablaProductos = new JTable(Proyecto1.tablearM(), titulos_M);
+        DefaultTableCellRenderer AlinearM = new DefaultTableCellRenderer();
+        AlinearM.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < titulos_M.length; i++) {
+            tablaPacientes.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+        }
+        tablaProductos.setEnabled(false);
+
+        sp3 = new JScrollPane(tablaProductos);
+        sp3.setBounds(45, 80, 750, 570);
+        sp3.setVisible(true);
+        p3.add(sp3);
+        /*
+        DefaultCategoryDataset datoS=new DefaultCategoryDataset();
+        datoS.addValue(Proyecto1.derma,"Especialidades","Dermatología");
+        datoS.addValue(Proyecto1.neuro, "Especialidades", "Neurología");
+        datoS.addValue(Proyecto1.infect, "Especialidades", "Infectología");
+        datoS.addValue(Proyecto1.ofta, "Especialdiades", "Oftamología");
+        datos.addValue(Proyecto1.radio, "Especialidades", "Radiología");
+        JFreeChart grafica=ChartFactory.createBarChart("Especialidades","Especialidad","",datos,PlotOrientation.VERTICAL,false,true,false);
+        ChartPanel pana=new ChartPanel(grafica);
+        p1.add(pana);
+        pana.setBounds(815, 250, 360, 300);
+        */
                 
         //*******************************************************************************************************************************************
         this.setTitle("Administrador");
@@ -195,14 +253,14 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             }
         }
         if(ae.getSource()==btnd3){
-            String codigo=JOptionPane.showInputDialog("Ingrese el código del Doctor");
-            Proyecto1.buscard(codigo);
+            String codigod=JOptionPane.showInputDialog("Ingrese el código del Doctor");
+            Proyecto1.buscard(codigod);
             if(Proyecto1.found==true){
                 Proyecto1.doctores.remove(Proyecto1.posicion);
                 Admin aes=new Admin();
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigo,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se encontró el código " + codigod + " dentro del listado de doctores","Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
             }
         }
         
@@ -227,14 +285,50 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             Proyecto1.buscarp(codigo);
             if(Proyecto1.found==true){
                 Proyecto1.pacientes.remove(Proyecto1.posicion);
-                JOptionPane.showMessageDialog(null, "Paciente eliminado exitosamente" + codigo,"Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Paciente eliminado exitosamente","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
                 Admin aa=new Admin();
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontró el código ingresado" + codigo,"Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se encontró el código " + codigo + " dentro del listado de pacientes","Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
             }
         }
 //*******************************************************************************************************************************************************
+        if(ae.getSource()==btnm1){
+            Proyecto1.registro=true;//Se pone true para que regrese a admin después o, sino, regrese al inicio
+            Añadir registrom=new Añadir();
+            this.dispose();
+        }
+        if(ae.getSource()==btnm2){
+            String codigoM= JOptionPane.showInputDialog("Ingrese el código del producto");
+            Proyecto1.buscarm(codigoM);
+            if(Proyecto1.found==true){
+                ActualizarProducto actM=new ActualizarProducto();
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el código " + codigoM + " dentro del listado de productos","Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        if(ae.getSource()==btnm3){
+            String codigoM=JOptionPane.showInputDialog("Ingrese el código del producto");
+            Proyecto1.buscarm(codigoM);
+            if(Proyecto1.found==true){
+                Proyecto1.productos.remove(Proyecto1.posicion);
+                JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                Admin aa=new Admin();
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el código " + codigoM + " dentro del listado de productos","Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 
     @Override

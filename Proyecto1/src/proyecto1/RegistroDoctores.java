@@ -211,11 +211,8 @@ public class RegistroDoctores extends JFrame implements FocusListener,ActionList
             Proyecto1.nuevaCuentaDoctor(nombre, apellidos, password, edad, genero, codigo,especialización,telefono);
             JOptionPane.showMessageDialog(null, "Su código de acceso es: " + codigo,"Registro completo",JOptionPane.INFORMATION_MESSAGE);
             Proyecto1.codigo++;
-            if(Proyecto1.registro==true){
-              Admin admin=new Admin();
-            }else{
-              Inicio inicio=new Inicio();
-            }
+            JOptionPane.showMessageDialog(null, "Registro completo","Registro Exitoso",JOptionPane.INFORMATION_MESSAGE);
+            Admin admin=new Admin();
             this.dispose();
         }
 

@@ -174,6 +174,7 @@ public class Registro extends JFrame implements FocusListener,ActionListener {
             Proyecto1.nuevaCuenta(nombre, apellidos, password, edad, genero, codigo);
             JOptionPane.showMessageDialog(null, "Su código de acceso es: " + codigo,"Registro completo",JOptionPane.INFORMATION_MESSAGE);
             Proyecto1.codigo++;
+            JOptionPane.showMessageDialog(null, "Registro completo","Registro Exitoso",JOptionPane.INFORMATION_MESSAGE);
             if(Proyecto1.registro==true){
               Admin admin=new Admin();
             }else{
