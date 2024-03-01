@@ -45,7 +45,6 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
     
     
     public Admin() throws HeadlessException {
-        Proyecto1.cuenta();
         panel=new JTabbedPane(JTabbedPane.TOP);
         p1=new JPanel(null);
         panel.addTab("Doctores",p1);
@@ -104,7 +103,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         sp1.setVisible(true);
         p1.add(sp1);
         
-        DefaultCategoryDataset datos=new DefaultCategoryDataset();
+        /* DefaultCategoryDataset datos=new DefaultCategoryDataset();
         datos.addValue(Proyecto1.derma,"Especialidades","Dermatología");
         datos.addValue(Proyecto1.neuro, "Especialidades", "Neurología");
         datos.addValue(Proyecto1.infect, "Especialidades", "Infectología");
@@ -114,7 +113,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         ChartPanel pana=new ChartPanel(grafica);
         p1.add(pana);
         pana.setBounds(815, 250, 360, 300);
-        
+        */
         
         //********************************************************************************************************************************************
         //Lo de la pestaña de pacientes

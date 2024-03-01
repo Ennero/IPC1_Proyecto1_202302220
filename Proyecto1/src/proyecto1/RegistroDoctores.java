@@ -18,7 +18,7 @@ public class RegistroDoctores extends JFrame implements FocusListener,ActionList
     private JPasswordField contraseñatxt;
     private JComboBox<String> sexo,especialidad;
     private JCheckBox contra;
-    private JButton registrar;
+    private JButton registrar, especialidadbtn;
     
     private int a=0;
     private int e=0;
@@ -26,6 +26,7 @@ public class RegistroDoctores extends JFrame implements FocusListener,ActionList
     private int o=0;
     private int u=0;
     private int q=0;
+    public static DefaultComboBoxModel<String> especialito=new DefaultComboBoxModel<>();
 
     public RegistroDoctores() {
         
@@ -101,8 +102,14 @@ public class RegistroDoctores extends JFrame implements FocusListener,ActionList
         especialidadlbl.setFont(new Font("Arial", Font.CENTER_BASELINE,17));
         this.add(especialidadlbl);
         
-        String[] especialidade = {"Dermatología","Neurología","Infectología","Radiología","Oftalmología"};
-        especialidad=new JComboBox<>(especialidade);
+        especialidadbtn=new JButton("Añadir");
+        especialidadbtn.setBounds(280, 330, 80, 25);
+        especialidadbtn.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
+        especialidadbtn.setFont(new Font("Arial",Font.BOLD,16));
+        especialidadbtn.addActionListener(this); // Agregamos un ActionListener al botón
+        this.add(especialidadbtn);
+        
+        especialidad=new JComboBox<>(especialito);
         especialidad.setBounds(146, 330, 110, 25);
         this.add(especialidad);
         
@@ -214,6 +221,10 @@ public class RegistroDoctores extends JFrame implements FocusListener,ActionList
             JOptionPane.showMessageDialog(null, "Registro completo","Registro Exitoso",JOptionPane.INFORMATION_MESSAGE);
             Admin admin=new Admin();
             this.dispose();
+        }
+        if(ae.getSource()==especialidadbtn){
+            String espe=JOptionPane.showInputDialog("Ingrese la especialidad");
+            especialito.addElement(espe);
         }
 
 

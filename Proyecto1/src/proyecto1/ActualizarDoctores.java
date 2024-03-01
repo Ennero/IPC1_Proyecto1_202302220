@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import static proyecto1.RegistroDoctores.especialito;
 
 /**
  *
@@ -17,7 +18,7 @@ public class ActualizarDoctores extends JFrame implements FocusListener,ActionLi
     private JPasswordField contraseñatxt;
     private JComboBox<String> sexo,especialidad;
     private JCheckBox contra;
-    private JButton actualizar;
+    private JButton actualizar,especialidadbtn;
     
     private int a=0;
     private int e=0;
@@ -54,6 +55,8 @@ public class ActualizarDoctores extends JFrame implements FocusListener,ActionLi
         apellidoslbl.setBounds(30,130,85,30);
         apellidoslbl.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
         this.add(apellidoslbl);
+        
+
         
         apellidotxt=new JTextField ("Ingrese los apellidos aquí");
         apellidotxt.setBounds(146,130,180,27);
@@ -101,13 +104,19 @@ public class ActualizarDoctores extends JFrame implements FocusListener,ActionLi
         edadtxt.setForeground(Color.gray);
         this.add(edadtxt);
         
+        especialidadbtn=new JButton("Añadir");
+        especialidadbtn.setBounds(280, 330, 80, 25);
+        especialidadbtn.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
+        especialidadbtn.setFont(new Font("Arial",Font.BOLD,16));
+        especialidadbtn.addActionListener(this); // Agregamos un ActionListener al botón
+        this.add(especialidadbtn);
+        
         JLabel especialidadlbl=new JLabel("Especialidad:");
         especialidadlbl.setBounds(30, 330, 110, 20);
         especialidadlbl.setFont(new Font("Arial", Font.CENTER_BASELINE,17));
         this.add(especialidadlbl);
         
-        String[] especialidade = {"Dermatología","Neurología","Infectología","Radiología","Oftalmología"};
-        especialidad=new JComboBox<>(especialidade);
+        especialidad=new JComboBox<>(RegistroDoctores.especialito);
         especialidad.setBounds(146, 330, 110, 25);
         this.add(especialidad);
         
@@ -218,6 +227,10 @@ public class ActualizarDoctores extends JFrame implements FocusListener,ActionLi
             JOptionPane.showMessageDialog(null, "Actualizado exitosamente","Proceso exitoso",JOptionPane.INFORMATION_MESSAGE);
             Admin admin=new Admin();
             this.dispose();
+        }
+        if(ae.getSource()==especialidadbtn){
+            String espe=JOptionPane.showInputDialog("Ingrese la especialidad");
+            especialito.addElement(espe);
         }
 
     }

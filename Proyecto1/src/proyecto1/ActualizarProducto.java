@@ -16,7 +16,7 @@ public class ActualizarProducto extends JFrame implements FocusListener,ActionLi
     
     private JTextField cantidadtxt,descripciontxt,preciotxt;
     private JComboBox<String> nombre;
-    private JButton añadir;
+    private JButton añadir,nonobtn;
     
     private int a=0;
     private int e=0;
@@ -62,8 +62,14 @@ public class ActualizarProducto extends JFrame implements FocusListener,ActionLi
         sexolbl.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
         this.add(sexolbl);
         
-        String[] nombres = {"Pastillas","Jarabe","Mascarillas","Lentes","Suero"};
-        nombre=new JComboBox<>(nombres);
+        nonobtn=new JButton("Añadir");
+        nonobtn.setBounds(280, 165, 80, 25);
+        nonobtn.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
+        nonobtn.setFont(new Font("Arial",Font.BOLD,16));
+        nonobtn.addActionListener(this); // Agregamos un ActionListener al botón
+        this.add(nonobtn);
+        
+        nombre=new JComboBox<>(Añadir.productito);
         nombre.setBounds(146, 165, 110, 25);
         this.add(nombre);
         
@@ -140,6 +146,10 @@ public class ActualizarProducto extends JFrame implements FocusListener,ActionLi
             JOptionPane.showMessageDialog(null, "Actualizado exitosamente","Proceso exitoso",JOptionPane.INFORMATION_MESSAGE);
             Admin admin=new Admin();
             this.dispose();
+        }
+        if(ae.getSource()==nonobtn){
+            String espe=JOptionPane.showInputDialog("Ingrese el nombre del producto");
+            Añadir.productito.addElement(espe);
         }
 
     }

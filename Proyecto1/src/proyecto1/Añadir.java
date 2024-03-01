@@ -16,11 +16,12 @@ public class Añadir extends JFrame implements FocusListener,ActionListener {
     
     private JTextField cantidadtxt,descripciontxt,preciotxt;
     private JComboBox<String> nombre;
-    private JButton añadir;
+    private JButton añadir, nonobtn;
     
     private int a=0;
     private int e=0;
     private int i=0;
+    public static DefaultComboBoxModel<String> productito=new DefaultComboBoxModel<>();
 
     public Añadir() throws HeadlessException {
         
@@ -58,10 +59,16 @@ public class Añadir extends JFrame implements FocusListener,ActionListener {
         sexolbl.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
         this.add(sexolbl);
         
-        String[] nombres = {"Pastillas","Jarabe","Mascarillas","Lentes","Suero"};
-        nombre=new JComboBox<>(nombres);
+        nombre=new JComboBox<>(productito);
         nombre.setBounds(146, 165, 110, 25);
         this.add(nombre);
+        
+        nonobtn=new JButton("Añadir");
+        nonobtn.setBounds(280, 165, 80, 25);
+        nonobtn.setBackground(new Color(211, 217, 232)); // Ajuste de color de boton, con color en RGB
+        nonobtn.setFont(new Font("Arial",Font.BOLD,16));
+        nonobtn.addActionListener(this); // Agregamos un ActionListener al botón
+        this.add(nonobtn);
         
         JLabel edadlbl=new JLabel("Precio:");
         edadlbl.setBounds(30, 210, 110, 20);
@@ -139,6 +146,10 @@ public class Añadir extends JFrame implements FocusListener,ActionListener {
             Admin admin=new Admin();
             JOptionPane.showMessageDialog(null, "Añadido exitosamente","Proceso exitoso",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
+        }
+        if(ae.getSource()==nonobtn){
+            String espe=JOptionPane.showInputDialog("Ingrese el nombre del producto");
+            productito.addElement(espe);
         }
 
 

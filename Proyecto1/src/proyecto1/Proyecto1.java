@@ -26,6 +26,7 @@ public class Proyecto1 {
     static ArrayList<Persona> pacientes= new ArrayList<>();
     static ArrayList<Doctor> doctores=new ArrayList<>();
     static ArrayList<Producto> productos=new ArrayList<>();
+
     
     static int codigoP=100;
     static int codigo=1000;
@@ -42,8 +43,8 @@ public class Proyecto1 {
         }
        //ActualizarDatos a=new ActualizarDatos();
       //Inicio inicio=new Inicio();
-       Admin registro=new Admin();
-       // RegistroDoctores a=new RegistroDoctores();
+       //Admin registro=new Admin();
+        RegistroDoctores a=new RegistroDoctores();
        //Añadir a=new Añadir();
 
         
@@ -91,7 +92,8 @@ public class Proyecto1 {
     }
     static int posicion=0;
     static boolean found;
-    
+    //**********************************************************************************************************************************
+
     public static void buscard(String codigo){
         int encontrado=0;
         for(int j=0;j<doctores.size();j++){
@@ -132,61 +134,12 @@ public class Proyecto1 {
         }
         posicion=encontrado;
     }
-    public static int derma;
-    public static int neuro;
-    public static int infect;
-    public static int radio;
-    public static int ofta;
     
-    public static void cuenta(){
-        derma=0;
-        neuro=0;
-        infect=0;
-        ofta=0;
-        radio=0;
-        for(int i=0;i<doctores.size();i++){
-        if("Dermatología".equals(doctores.get(i).getEspecialidad())){            
-            derma++;
-           }
-        if("Neurología".equals(doctores.get(i).getEspecialidad())){            
-            neuro++;
-           }
-        if("Infectología".equals(doctores.get(i).getEspecialidad())){            
-            infect++;
-           }
-        if("Radiología".equals(doctores.get(i).getEspecialidad())){            
-            radio++;
-           }
-        if("Oftalmología".equals(doctores.get(i).getEspecialidad())){            
-            ofta++;
-           }
-    }
-    }
-    public static int pasti;
-    public static int jarabe;
-    public static int masca;
-    public static int lentes;
-    public static int suero;
+
     
-    public static void cuentaP(){
-        for(int i=0;i<doctores.size();i++){
-        if("Pastillas".equals(productos.get(i).getNombre())){            
-            pasti++;
-           }
-        if("Jarabe".equals(productos.get(i).getNombre())){            
-            jarabe++;
-           }
-        if("Mascarillas".equals(productos.get(i).getNombre())){            
-            masca++;
-           }
-        if("Lentes".equals(productos.get(i).getNombre())){            
-            lentes++;
-           }
-        if("Suero".equals(productos.get(i).getNombre())){            
-            suero++;
-           }        
-        }
-    }
+    
+  
+
     
     
     static void nuevaCuenta(String nombres,String apellidos,String contraseña,String edad,String genero,String codigo){
