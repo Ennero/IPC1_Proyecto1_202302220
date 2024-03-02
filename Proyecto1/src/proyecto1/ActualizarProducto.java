@@ -47,7 +47,7 @@ public class ActualizarProducto extends JFrame implements FocusListener,ActionLi
         this.add(cantidadtxt);
         
         JLabel apellidoslbl=new JLabel("Descripción:");
-        apellidoslbl.setBounds(30,130,85,30);
+        apellidoslbl.setBounds(30,130,115,30);
         apellidoslbl.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
         this.add(apellidoslbl);
         

@@ -26,11 +26,16 @@ public class Proyecto1 {
     static ArrayList<Persona> pacientes= new ArrayList<>();
     static ArrayList<Doctor> doctores=new ArrayList<>();
     static ArrayList<Producto> productos=new ArrayList<>();
-
     
+    public static void refresD(){
+        DoctoresM sdf=new DoctoresM();
+    }
+
     static int codigoP=100;
     static int codigo=1000;
     static boolean registro=false;
+    static boolean irAdmin=true;
+    static int indice;
 
     
      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -46,11 +51,28 @@ public class Proyecto1 {
        //Admin registro=new Admin();
         RegistroDoctores a=new RegistroDoctores();
        //Añadir a=new Añadir();
-
-        
-        
-        
+       //DoctoresM sdkfjh=new DoctoresM();
+}
+    public static boolean PP,DD;
+    public static void ingresoP(String contraseña, String codigo){
+        PP=false;
+        for (int i=0;i<pacientes.size();i++){
+            if(codigo.equals(pacientes.get(i).getCodigo()) && contraseña.equals(pacientes.get(i).getContraseña())){
+                PP=true;
+                indice=i;
+            }
+        }
     }
+    public static void ingresoD(String contraseña, String codigo){
+        DD=false;
+        for (int i=0;i<doctores.size();i++){
+            if(codigo.equals(doctores.get(i).getCodigo()) && contraseña.equals(doctores.get(i).getContraseña())){
+                DD=true;
+                indice=i;
+            }
+        }
+    }
+    
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public static Object[][] tablear() {
         int filas = pacientes.size();
@@ -92,8 +114,27 @@ public class Proyecto1 {
     }
     static int posicion=0;
     static boolean found;
+    
+    public static Object[][] tablearHorario(){
+        int fila=doctores.get(indice).getHorario().size();
+        Object[][] tableado = new Object[fila][2];
+        for (int i = 0; i < fila; i++) {
+            tableado[i][0] = i+1;
+            tableado[i][1] = doctores.get(indice).getHorario().get(i);
+        }
+        return tableado;
+        
+    }
     //**********************************************************************************************************************************
 
+    
+
+
+    
+    
+  
+
+    //*************************************************************************************************************************************************
     public static void buscard(String codigo){
         int encontrado=0;
         for(int j=0;j<doctores.size();j++){
@@ -134,14 +175,6 @@ public class Proyecto1 {
         }
         posicion=encontrado;
     }
-    
-
-    
-    
-  
-
-    
-    
     static void nuevaCuenta(String nombres,String apellidos,String contraseña,String edad,String genero,String codigo){
         pacientes.add(new Persona(nombres,apellidos,contraseña,edad,genero,codigo));
     }

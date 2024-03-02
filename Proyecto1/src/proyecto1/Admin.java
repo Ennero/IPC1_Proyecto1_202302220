@@ -34,7 +34,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
 
     JLabel titulodlbl, tituloplbl, titulomlbl;
     // JButton hace referencia a los botones
-    JButton btnd1, btnd2, btnd3, btnp1, btnp2, btnp3, btnm1, btnm2, btnm3;
+    JButton btnd1, btnd2, btnd3, btnp1, btnp2, btnp3, btnm1, btnm2, btnm3,regresar;
     //JTabbedPane	
     JTabbedPane panel;
     //JPanels
@@ -97,7 +97,6 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             tablaDoctores.getColumnModel().getColumn(i).setCellRenderer(Alineard);
         }
         tablaDoctores.setEnabled(false);
-
         sp1 = new JScrollPane(tablaDoctores);
         sp1.setBounds(45, 80, 750, 570);
         sp1.setVisible(true);
@@ -199,9 +198,11 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         DefaultTableCellRenderer AlinearM = new DefaultTableCellRenderer();
         AlinearM.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < titulos_M.length; i++) {
-            tablaPacientes.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+            tablaProductos.getColumnModel().getColumn(i).setCellRenderer(Alinear);
         }
         tablaProductos.setEnabled(false);
+        
+        
 
         sp3 = new JScrollPane(tablaProductos);
         sp3.setBounds(45, 80, 750, 570);
@@ -228,6 +229,12 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         this.getContentPane().add(panel);
         this.setVisible(true);
         setLocationRelativeTo(null);
+        
+        regresar=new JButton("Regresar");
+        regresar.setBounds(100,400,800,300);
+        regresar.setFont(new Font("Arial",Font.CENTER_BASELINE,250));
+        regresar.addActionListener(this);
+        p4.add(regresar);
         
     }
     
@@ -273,6 +280,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             String codigo= JOptionPane.showInputDialog("Ingrese el código del paciente");
             Proyecto1.buscarp(codigo);
             if(Proyecto1.found==true){
+                Proyecto1.irAdmin=true;
                 ActualizarDatos act=new ActualizarDatos();
                 this.dispose();
             }else{
@@ -311,6 +319,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             String codigoM=JOptionPane.showInputDialog("Ingrese el código del producto");
             Proyecto1.buscarm(codigoM);
             if(Proyecto1.found==true){
+                Proyecto1.irAdmin=true;
                 Proyecto1.productos.remove(Proyecto1.posicion);
                 JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
                 Admin aa=new Admin();
@@ -319,6 +328,12 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
                 JOptionPane.showMessageDialog(null, "No se encontró el código " + codigoM + " dentro del listado de productos","Codigo no encontrado",JOptionPane.INFORMATION_MESSAGE);
             }
         }
+        if(ae.getSource()==regresar){
+            Inicio aaa=new Inicio();
+            this.dispose();
+        }
+        
+
 
 
 
@@ -332,6 +347,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
 
     @Override
     public void stateChanged(ChangeEvent e) {
+             
 
     }
     

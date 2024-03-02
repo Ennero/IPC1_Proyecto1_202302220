@@ -225,8 +225,13 @@ public class ActualizarDoctores extends JFrame implements FocusListener,ActionLi
             Proyecto1.doctores.get(Proyecto1.posicion).setSexo(especialización);
             Proyecto1.doctores.get(Proyecto1.posicion).setContraseña(telefono);
             JOptionPane.showMessageDialog(null, "Actualizado exitosamente","Proceso exitoso",JOptionPane.INFORMATION_MESSAGE);
+            if(Proyecto1.irAdmin==true){
             Admin admin=new Admin();
             this.dispose();
+            }else{
+                DoctoresM doc=new DoctoresM();
+                this.dispose();
+            }
         }
         if(ae.getSource()==especialidadbtn){
             String espe=JOptionPane.showInputDialog("Ingrese la especialidad");

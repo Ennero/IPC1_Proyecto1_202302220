@@ -44,7 +44,7 @@ public class Añadir extends JFrame implements FocusListener,ActionListener {
         this.add(cantidadtxt);
         
         JLabel apellidoslbl=new JLabel("Descripción:");
-        apellidoslbl.setBounds(30,130,85,30);
+        apellidoslbl.setBounds(30,130,115,30);
         apellidoslbl.setFont(new Font("Arial", Font.CENTER_BASELINE ,17));
         this.add(apellidoslbl);
         
@@ -97,6 +97,10 @@ public class Añadir extends JFrame implements FocusListener,ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra la aplicación al cerrar la ventana
         this.setResizable(false);  // No permite redimensionar la ventana
         this.setVisible(true); // Hace visible la ventana
+        
+        //*******************************************************************************************************************************
+        
+        
     }
     
     

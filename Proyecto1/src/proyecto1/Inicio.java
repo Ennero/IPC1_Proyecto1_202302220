@@ -149,6 +149,20 @@ public class Inicio extends JFrame implements FocusListener, ActionListener{
             if(nombreUsuario.equals("202302220") && contra.equals("proyecto1IPC1")){
                 Admin admin=new Admin();
                 this.dispose();
+            }else{
+                Proyecto1.ingresoP(contra, nombreUsuario);
+                if(Proyecto1.PP==true){
+                    PacienteM pp=new PacienteM();
+                    this.dispose();
+                }else{
+                    Proyecto1.ingresoD(contra, nombreUsuario);
+                    if(Proyecto1.DD==true){
+                        DoctoresM dd=new DoctoresM();
+                        this.dispose(); 
+                    }else{
+                        JOptionPane.showMessageDialog(null, "No se encontró el usuario","Usuario no encontrado",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
             }
             
         }else
