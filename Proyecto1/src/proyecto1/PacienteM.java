@@ -160,8 +160,8 @@ public class PacienteM extends JFrame implements ChangeListener,ActionListener,F
         //*******************************************************************************************************************************************
 
         
-        historialbtn=new JButton("Gerar Historial de citas");
-        historialbtn.setBounds(0, 0, 300, 50);
+        historialbtn=new JButton("Generar Historial de citas");
+        historialbtn.setBounds(10, 10, 320, 50);
         historialbtn.setFont(new Font(titulodlbl.getFont().getFontName(), Font.BOLD, 24));
         p2.add(historialbtn);
         historialbtn.addActionListener(this);
@@ -241,6 +241,8 @@ public class PacienteM extends JFrame implements ChangeListener,ActionListener,F
             }
         }
             time.setEnabled(true);
+            date.setEnabled(false);
+            mostrarhorasbtn.setEnabled(false);
         }
         if(ae.getSource()==generar){
             generar.setEnabled(false);
