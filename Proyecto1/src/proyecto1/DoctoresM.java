@@ -29,7 +29,7 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
 
     JLabel titulodlbl, tituloplbl, titulomlbl;
     // JButton hace referencia a los botones
-    JButton editarbtn, btnm3,regresar;
+    JButton editarbtn, btnm3,regresar,añadir;
     //JTabbedPane	
     JTabbedPane panel;
     //JPanels
@@ -38,6 +38,8 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
     JTable tablacitas;
     JScrollPane sp1;
     JTextField horariotxt;
+    JComboBox date;
+    public static DefaultComboBoxModel<String> fecha=new DefaultComboBoxModel<>();
     
 
     public DoctoresM() throws HeadlessException {
@@ -98,16 +100,32 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         btnm3=new JButton("Asignar");
         btnm3.setBounds(440,30,60,30);
         btnm3.addActionListener(this);
+        btnm3.setBackground(Color.green);
         p2.add(btnm3);
+        
+        JLabel fechalbl=new JLabel("Fecha de Citas:");
+        fechalbl.setFont(new Font("Arial", Font.BOLD, 16));
+        fechalbl.setBounds(100, 65, 165, 30);
+        p2.add(fechalbl);
+        
+        date=new JComboBox<>(fecha);
+        date.setBounds(230, 65, 200, 30);
+        p2.add(date);
+        
+        
+        añadir=new JButton("Añadir");
+        añadir.setBounds(440,65,60,30);
+        añadir.addActionListener(this);
+        p2.add(añadir);
         
         JLabel citiii=new JLabel("Mi horario disponible para citas:");
         citiii.setFont(new Font("Arial", Font.BOLD, 16));
-        citiii.setBounds(160, 65, 300, 30);
+        citiii.setBounds(160, 100, 300, 30);
         citiii.setVerticalAlignment(SwingConstants.CENTER);
         citiii.setHorizontalAlignment(SwingConstants.CENTER);
         p2.add(citiii);
         
-        String[] titulos_d = {"No.", "Horario de cita"};
+        String[] titulos_d = {"No.", "Horario de cita","Fecha de cita"};
         tablacitas = new JTable(Proyecto1.tablearHorario(), titulos_d);
         DefaultTableCellRenderer Alineard = new DefaultTableCellRenderer();
         Alineard.setHorizontalAlignment(SwingConstants.CENTER);
@@ -116,7 +134,7 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         }
         tablacitas.setEnabled(false);
         sp1 = new JScrollPane(tablacitas);
-        sp1.setBounds(45, 100, 700, 300);
+        sp1.setBounds(45, 160, 700, 240);
         sp1.setVisible(true);
         p2.add(sp1);
 
@@ -148,7 +166,9 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource()==btnm3){
             String horariito=horariotxt.getText();
+            String fechita=(String)fecha.getSelectedItem();
             Proyecto1.doctores.get(Proyecto1.indice).getHorario().add(horariito);
+            Proyecto1.doctores.get(Proyecto1.indice).getFecha().add(fechita);
             Proyecto1.tablearHorario();
             JOptionPane.showMessageDialog(null, "Horario ingresado exitosamente","Nuevo horario ingresado",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -167,6 +187,10 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         if(ae.getSource()==regresar){
             Inicio ini=new Inicio();
             this.dispose();
+        }
+        if(ae.getSource()==añadir){
+            String dia=JOptionPane.showInputDialog("Ingrese la nueva fecha");
+            date.addItem(dia);
         }
 
     }

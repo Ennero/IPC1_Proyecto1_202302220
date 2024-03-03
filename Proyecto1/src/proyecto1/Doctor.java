@@ -11,7 +11,8 @@ public class Doctor extends Persona {
     
     private String especialidad;
     private String telefono;
-    private ArrayList<String> horario=new ArrayList<>();
+    private ArrayList<String> paciente=new ArrayList<>();
+    private ArrayList<Integer> indicePacientes=new ArrayList<>();
 
     public Doctor(String nombres, String apellidos, String contraseña, String edad, String sexo, String codigo,String especialidad,String telefono) {
         super(nombres, apellidos, contraseña, edad, sexo, codigo);
@@ -49,23 +50,34 @@ public class Doctor extends Persona {
     }
 
     /**
-     * @return the horario
+     * @return the paciente
      */
-    public ArrayList<String> getHorario() {
-        return horario;
+    public ArrayList<String> getPaciente() {
+        return paciente;
     }
 
     /**
-     * @param horario the horario to set
+     * @param paciente the paciente to set
      */
-    public void setHorario(ArrayList<String> horario) {
-        this.horario = horario;
+    public void setPaciente(ArrayList<String> paciente) {
+        this.paciente = paciente;
+    }
+
+    /**
+     * @return the indicePacientes
+     */
+    public ArrayList<Integer> getIndicePacientes() {
+        return indicePacientes;
+    }
+
+    /**
+     * @param indicePacientes the indicePacientes to set
+     */
+    public void setIndicePacientes(ArrayList<Integer> indicePacientes) {
+        this.indicePacientes = indicePacientes;
     }
 
 
-    /**
-     * @return the horario
-     */
     
 
    

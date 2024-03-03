@@ -1,13 +1,19 @@
 
 package proyecto1;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Enner
  */
 public class Persona {
 
-    private String nombres, apellidos, contraseña, codigo,edad, sexo,horarios;
+    private String nombres, apellidos, contraseña, codigo,edad, sexo;
+    private ArrayList<String> horario=new ArrayList<>();
+    private ArrayList<String> fecha=new ArrayList<>();
+    private ArrayList<String> estado=new ArrayList<>();
+    private ArrayList<String> motivo=new ArrayList<>();
 
     public Persona(String nombres, String apellidos, String contraseña, String edad, String sexo, String codigo) {
         this.nombres = nombres;
@@ -101,6 +107,64 @@ public class Persona {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    /**
+     * @return the horario
+     */
+    public ArrayList<String> getHorario() {
+        return horario;
+    }
+
+    /**
+     * @param horario the horario to set
+     */
+    public void setHorario(ArrayList<String> horario) {
+        this.horario = horario;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public ArrayList<String> getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(ArrayList<String> fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the estado
+     */
+    public ArrayList<String> getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(ArrayList<String> estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the motivo
+     */
+    public ArrayList<String> getMotivo() {
+        return motivo;
+    }
+
+    /**
+     * @param motivo the motivo to set
+     */
+    public void setMotivo(ArrayList<String> motivo) {
+        this.motivo = motivo;
+    }
+
+    
 
     
 

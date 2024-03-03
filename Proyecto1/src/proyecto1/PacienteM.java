@@ -28,9 +28,9 @@ import javax.swing.table.TableColumnModel;
  */
 public class PacienteM extends JFrame implements ChangeListener,ActionListener,FocusListener {
     
-    JLabel titulodlbl, tituloplbl, titulomlbl;
+    JLabel titulodlbl ,titulomlbl,horalbl,datelbl,doc,horariolbl;
     // JButton hace referencia a los botones
-    JButton editarbtn,regresar;
+    JButton editarbtn,regresar,mostrarDbtn,mostrarHbtn,mostrarhorasbtn,generar,historialbtn;
     //JTabbedPane	
     JTabbedPane panel;
     //JPanels
@@ -39,7 +39,11 @@ public class PacienteM extends JFrame implements ChangeListener,ActionListener,F
     JTable tablaPacientes,tablaDoctores, tablaProductos;
     JScrollPane sp1,sp2,sp3;
     JTextArea motivo;
-    JComboBox especialidad,doctor,fecha,hora;
+    JTable tablacitas;
+    JComboBox date,time,especialidad,doctoradd;
+    public static DefaultComboBoxModel<String> doctor=new DefaultComboBoxModel<>();
+    public static DefaultComboBoxModel<String> fecha=new DefaultComboBoxModel<>();
+    public static DefaultComboBoxModel<String> hora=new DefaultComboBoxModel<>();
 
     public PacienteM() throws HeadlessException {
         panel=new JTabbedPane(JTabbedPane.TOP);
@@ -63,7 +67,7 @@ public class PacienteM extends JFrame implements ChangeListener,ActionListener,F
         regresar.addActionListener(this);
         this.add(regresar);
         //***************************************************************************************************************************************
-        //Lo de las pestaña solicitar cita
+        //Lo de las pestaña de solicitar cita
         titulodlbl = new JLabel("Motivo de la cita:");
         titulodlbl.setBounds(0, 0, 300, 50);
         this.titulodlbl.setOpaque(true);
@@ -91,14 +95,79 @@ public class PacienteM extends JFrame implements ChangeListener,ActionListener,F
         especialidad.setBounds(170, 225, 110, 25);
         p1.add(especialidad);
         
-        JLabel doc=new JLabel("Doctor:");
-        espe.setFont(new Font("Arial", Font.BOLD, 16));
-        espe.setBounds(55, 225, 125, 25);
-        p1.add(espe);
+        mostrarDbtn=new JButton("Mostrar doctores");
+        mostrarDbtn.setBounds(300,225,130,25);
+        mostrarDbtn.addActionListener(this);
+        p1.add(mostrarDbtn);
         
+         doc=new JLabel("Doctor:");
+            doc.setFont(new Font("Arial", Font.BOLD, 16));
+            doc.setBounds(55, 265, 125, 25);
+            doc.setEnabled(false);
+            p1.add(doc);
         
+        doctoradd=new JComboBox<>(doctor);
+        doctoradd.setBounds(170, 265, 110, 25);
+        doctoradd.setEnabled(false);
+        p1.add(doctoradd);
+        
+        mostrarHbtn=new JButton("Mostrar horarios");
+        mostrarHbtn.setBounds(300,265,130,25);
+        mostrarHbtn.addActionListener(this);
+        mostrarHbtn.setEnabled(false);
+        p1.add(mostrarHbtn);
+        
+        horariolbl=new JLabel("Horarios de citas disponibles");
+        horariolbl.setFont(new Font("Arial", Font.BOLD, 16));
+        horariolbl.setBounds(55, 295, 230, 25);
+        horariolbl.setEnabled(false);
+        p1.add(horariolbl);
+        
+        JLabel datelbl=new JLabel("Fecha:");
+        datelbl.setFont(new Font("Arial", Font.BOLD, 16));
+        datelbl.setBounds(55, 325, 145, 25);
+        datelbl.setEnabled(false);
+        p1.add(datelbl);
+
+        date=new JComboBox<>(fecha);
+        date.setBounds(130, 325, 145, 25);
+        date.setEnabled(false);
+        p1.add(date);
+        
+        mostrarhorasbtn=new JButton("Mostrar Horas disponibles");
+        mostrarhorasbtn.setBounds(280,325,160,25);
+        mostrarhorasbtn.addActionListener(this);
+        mostrarhorasbtn.setEnabled(false);
+        p1.add(mostrarhorasbtn);
+        
+        JLabel horalbl=new JLabel("Hora:");
+        horalbl.setFont(new Font("Arial", Font.BOLD, 16));
+        horalbl.setBounds(55, 355, 145, 25);
+        horalbl.setEnabled(false);
+        p1.add(horalbl);
+        
+        time=new JComboBox<>(hora);
+        time.setBounds(130, 355, 145, 25);
+        time.setEnabled(false);
+        p1.add(time);
+        
+        generar=new JButton("Generar");
+        generar.setBounds(450,225,320,80);
+        generar.setFont(new Font("Arial",Font.CENTER_BASELINE,50));
+        generar.addActionListener(this);
+        p1.add(generar);
         
         //*******************************************************************************************************************************************
+
+        
+        historialbtn=new JButton("Gerar Historial de citas");
+        historialbtn.setBounds(0, 0, 300, 50);
+        historialbtn.setFont(new Font(titulodlbl.getFont().getFontName(), Font.BOLD, 24));
+        p2.add(historialbtn);
+        historialbtn.addActionListener(this);
+        
+        
+        //******************************************************************************************************************************************
         this.setTitle("Paciente");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -131,11 +200,85 @@ public class PacienteM extends JFrame implements ChangeListener,ActionListener,F
             Inicio ini=new Inicio();
             this.dispose();
         }
+        if(ae.getSource()==mostrarDbtn){
+            String especialidadita= (String)especialidad.getSelectedItem();
+            Proyecto1.buscaraldoc(especialidadita);
+            doctoradd.setEnabled(true);
+            especialidad.setEnabled(false);
+            mostrarDbtn.setEnabled(false);
+            doc.setEnabled(true);
+            mostrarHbtn.setEnabled(true);
+            motivo.setEnabled(false);
+        }
+        if(ae.getSource()==mostrarHbtn){
+            String nombrecito=(String) doctoradd.getSelectedItem();
+            Proyecto1.buscardNombre(nombrecito);
+            int pre=0;
+            for(int j=0;j<Proyecto1.doctores.get(Proyecto1.posicion).getFecha().size();j++){
+                if(j>0){
+                    if(!(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j)).equals((date.getItemAt(pre)))){
+                                        date.addItem(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j));
+                                        pre=j;
+                    }
+                }else{
+                    date.addItem(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j));
+                                        pre=j;
+                }
+
+        }
+            date.setEnabled(true);
+            mostrarHbtn.setEnabled(false);
+            doctoradd.setEnabled(false);
+            horariolbl.setEnabled(true);
+            mostrarhorasbtn.setEnabled(true);
+        }
+        
+        if(ae.getSource()==mostrarhorasbtn){
+            String fechita=(String) date.getSelectedItem();
+            for(int j=0;j<Proyecto1.doctores.get(Proyecto1.posicion).getHorario().size();j++){
+            if(fechita.equals(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j))){
+                time.addItem(Proyecto1.doctores.get(Proyecto1.posicion).getHorario().get(j));
+            }
+        }
+            time.setEnabled(true);
+        }
+        if(ae.getSource()==generar){
+            generar.setEnabled(false);
+            time.setEnabled(false);
+            String nomecito=Proyecto1.pacientes.get(Proyecto1.indice).getNombres();
+            String motivos=motivo.getText();
+            String fech=(String)date.getSelectedItem();
+            String hor=(String)time.getSelectedItem();
+            Proyecto1.doctores.get(Proyecto1.posicion).getPaciente().add(nomecito);
+            Proyecto1.doctores.get(Proyecto1.posicion).getHorario().add(hor);
+            Proyecto1.doctores.get(Proyecto1.posicion).getFecha().add(fech);
+            Proyecto1.doctores.get(Proyecto1.posicion).getIndicePacientes().add(Proyecto1.indice);
+            Proyecto1.pacientes.get(Proyecto1.indice).getEstado().add("Pendiente");
+            Proyecto1.pacientes.get(Proyecto1.indice).getFecha().add(fech);
+            Proyecto1.pacientes.get(Proyecto1.indice).getHorario().add(hor);
+            Proyecto1.pacientes.get(Proyecto1.indice).getMotivo().add(motivos);                                   
+        }
+        if (ae.getSource()==historialbtn){
+            String[] titulos_d = {"No.", "Estado","Fecha","Hora"};
+            tablacitas = new JTable(Proyecto1.tablearCitasP(), titulos_d);
+            DefaultTableCellRenderer Alineard = new DefaultTableCellRenderer();
+            Alineard.setHorizontalAlignment(SwingConstants.CENTER);
+            for (int i = 0; i < titulos_d.length; i++) {
+                tablacitas.getColumnModel().getColumn(i).setCellRenderer(Alineard);
+            }
+            tablacitas.setEnabled(false);
+            sp1 = new JScrollPane(tablacitas);
+            sp1.setBounds(45, 60, 700, 370);
+            sp1.setVisible(true);
+            p2.add(sp1);
+        }
+        
 
     }
 
     @Override
-    public void focusGained(FocusEvent e) {
+    public void focusGained(FocusEvent fe) {
+        
 
     }
 

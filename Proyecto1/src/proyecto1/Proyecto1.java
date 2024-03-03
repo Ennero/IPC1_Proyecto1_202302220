@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.UIDefaults;
@@ -48,8 +49,8 @@ public class Proyecto1 {
         }
        //ActualizarDatos a=new ActualizarDatos();
       //Inicio inicio=new Inicio();
-       //Admin registro=new Admin();
-        RegistroDoctores a=new RegistroDoctores();
+       Admin registro=new Admin();
+       //RegistroDoctores a=new RegistroDoctores();
        //Añadir a=new Añadir();
        //DoctoresM sdkfjh=new DoctoresM();
 }
@@ -117,14 +118,26 @@ public class Proyecto1 {
     
     public static Object[][] tablearHorario(){
         int fila=doctores.get(indice).getHorario().size();
-        Object[][] tableado = new Object[fila][2];
+        Object[][] tableado = new Object[fila][3];
         for (int i = 0; i < fila; i++) {
             tableado[i][0] = i+1;
             tableado[i][1] = doctores.get(indice).getHorario().get(i);
+            tableado[i][2]= doctores.get(indice).getFecha().get(i);
         }
         return tableado;
-        
     }
+    public static Object[][] tablearCitasP(){
+        int fila=pacientes.get(indice).getHorario().size();
+        Object[][] tableado = new Object[fila][4];
+        for (int i = 0; i < fila; i++) {
+            tableado[i][0] = i+1;
+            tableado[i][1] = pacientes.get(indice).getEstado().get(i);
+            tableado[i][2]= pacientes.get(indice).getFecha().get(i);
+            tableado[i][3]=pacientes.get(indice).getHorario().get(i);
+        }
+        return tableado;
+    }
+    
     //**********************************************************************************************************************************
 
     
@@ -135,6 +148,28 @@ public class Proyecto1 {
   
 
     //*************************************************************************************************************************************************
+    public static void buscaraldoc(String espe){
+        for(int j=0;j<doctores.size();j++){
+            if(espe.equals(doctores.get(j).getEspecialidad())){
+                PacienteM.doctor.addElement(doctores.get(j).getNombres() + " " + doctores.get(j).getApellidos());
+            }
+        }
+    }
+    
+    public static void buscardNombre(String nombre){
+        int encontrado=0;
+        for(int j=0;j<doctores.size();j++){
+            if(nombre.equals(doctores.get(j).getNombres())){
+                encontrado=j;
+                found=true;
+                break;
+            }else{
+                found=false;
+            }
+        }
+        posicion=encontrado;
+    }
+    
     public static void buscard(String codigo){
         int encontrado=0;
         for(int j=0;j<doctores.size();j++){
