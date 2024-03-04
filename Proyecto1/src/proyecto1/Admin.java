@@ -23,6 +23,9 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -96,23 +99,31 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         for (int i = 0; i < titulos_d.length; i++) {
             tablaDoctores.getColumnModel().getColumn(i).setCellRenderer(Alineard);
         }
+       
         tablaDoctores.setEnabled(false);
         sp1 = new JScrollPane(tablaDoctores);
         sp1.setBounds(45, 80, 750, 570);
         sp1.setVisible(true);
         p1.add(sp1);
         
-        /* DefaultCategoryDataset datos=new DefaultCategoryDataset();
-        datos.addValue(Proyecto1.derma,"Especialidades","Dermatología");
-        datos.addValue(Proyecto1.neuro, "Especialidades", "Neurología");
-        datos.addValue(Proyecto1.infect, "Especialidades", "Infectología");
-        datos.addValue(Proyecto1.ofta, "Especialdiades", "Oftamología");
-        datos.addValue(Proyecto1.radio, "Especialidades", "Radiología");
-        JFreeChart grafica=ChartFactory.createBarChart("Top 5 Especialidades","Especialidad","",datos,PlotOrientation.VERTICAL,false,true,false);
+        String[][] espC=Proyecto1.contarespecialidad(); 
+        DefaultCategoryDataset datos=new DefaultCategoryDataset();
+        try{
+            for(int i=0; i<espC.length;i++){
+                if(i<5){
+                    datos.addValue(Integer.parseInt(espC[i][1]),"Especialidad" , espC[i][0]);
+                }else{
+                    break;
+                }
+        }
+        }catch(Exception e){
+        }
+        JFreeChart grafica=ChartFactory.createBarChart("Top Especialidades","Especialidad","",datos,PlotOrientation.VERTICAL,false,true,false);
         ChartPanel pana=new ChartPanel(grafica);
-        p1.add(pana);
         pana.setBounds(815, 250, 360, 300);
-        */
+        p1.add(pana);
+        
+        
         
         //********************************************************************************************************************************************
         //Lo de la pestaña de pacientes
@@ -208,18 +219,25 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         sp3.setBounds(45, 80, 750, 570);
         sp3.setVisible(true);
         p3.add(sp3);
-        /*
-        DefaultCategoryDataset datoS=new DefaultCategoryDataset();
-        datoS.addValue(Proyecto1.derma,"Especialidades","Dermatología");
-        datoS.addValue(Proyecto1.neuro, "Especialidades", "Neurología");
-        datoS.addValue(Proyecto1.infect, "Especialidades", "Infectología");
-        datoS.addValue(Proyecto1.ofta, "Especialdiades", "Oftamología");
-        datos.addValue(Proyecto1.radio, "Especialidades", "Radiología");
-        JFreeChart grafica=ChartFactory.createBarChart("Especialidades","Especialidad","",datos,PlotOrientation.VERTICAL,false,true,false);
-        ChartPanel pana=new ChartPanel(grafica);
-        p1.add(pana);
-        pana.setBounds(815, 250, 360, 300);
-        */
+        
+        int[] productoN=Proyecto1.contarproductos();
+        DefaultCategoryDataset datos3=new DefaultCategoryDataset();
+        try{
+            for(int i=0; i<productoN.length;i++){
+                if(i<3){
+                    Proyecto1.buscarMNCantidad(productoN[i]);
+                    datos3.addValue(productoN[i],"Producto" , Proyecto1.productos.get(Proyecto1.posicion).getNombre());
+                }else{
+                    break;
+                }
+        }
+        }catch(Exception e){
+            System.out.println("Pudo explotar pero lo evite con el try-catch, denada :)");
+        }
+        JFreeChart grafica2=ChartFactory.createBarChart("Top Productos","Productos","",datos3,PlotOrientation.VERTICAL,false,true,false);
+        ChartPanel pana2=new ChartPanel(grafica2);
+        pana2.setBounds(815, 250, 360, 300);
+        p3.add(pana2);
                 
         //*******************************************************************************************************************************************
         this.setTitle("Administrador");

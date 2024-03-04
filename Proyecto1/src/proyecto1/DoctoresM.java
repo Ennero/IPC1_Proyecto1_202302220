@@ -35,8 +35,8 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
     //JPanels
     JPanel p1, p2, p3;
     //Atributos para la tabla
-    JTable tablacitas;
-    JScrollPane sp1;
+    JTable tablacitas,tablacitas2;
+    JScrollPane sp1,sp2;
     JTextField horariotxt;
     JComboBox date;
     public static DefaultComboBoxModel<String> fecha=new DefaultComboBoxModel<>();
@@ -125,18 +125,18 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         citiii.setHorizontalAlignment(SwingConstants.CENTER);
         p2.add(citiii);
         
-        String[] titulos_d = {"No.", "Horario de cita","Fecha de cita"};
-        tablacitas = new JTable(Proyecto1.tablearHorario(), titulos_d);
-        DefaultTableCellRenderer Alineard = new DefaultTableCellRenderer();
-        Alineard.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < titulos_d.length; i++) {
-            tablacitas.getColumnModel().getColumn(i).setCellRenderer(Alineard);
+        String[] titulos_d2 = {"No.", "Horario de cita","Fecha de cita"};
+        tablacitas2 = new JTable(Proyecto1.tablearHorario(), titulos_d2);
+        DefaultTableCellRenderer Alineard2 = new DefaultTableCellRenderer();
+        Alineard2.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < titulos_d2.length; i++) {
+            tablacitas2.getColumnModel().getColumn(i).setCellRenderer(Alineard2);
         }
-        tablacitas.setEnabled(false);
-        sp1 = new JScrollPane(tablacitas);
-        sp1.setBounds(45, 160, 700, 240);
-        sp1.setVisible(true);
-        p2.add(sp1);
+        tablacitas2.setEnabled(false);
+        sp2 = new JScrollPane(tablacitas);
+        sp2.setBounds(45, 160, 700, 240);
+        sp2.setVisible(true);
+        p2.add(sp2);
 
         
         

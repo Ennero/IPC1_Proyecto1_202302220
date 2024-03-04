@@ -220,6 +220,7 @@ public class RegistroDoctores extends JFrame implements FocusListener,ActionList
             Proyecto1.codigo++;
             JOptionPane.showMessageDialog(null, "Registro completo","Registro Exitoso",JOptionPane.INFORMATION_MESSAGE);
             Admin admin=new Admin();
+            
             this.dispose();
         }
         if(ae.getSource()==especialidadbtn){
