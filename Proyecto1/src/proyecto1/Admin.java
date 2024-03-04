@@ -209,12 +209,9 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         DefaultTableCellRenderer AlinearM = new DefaultTableCellRenderer();
         AlinearM.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < titulos_M.length; i++) {
-            tablaProductos.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+            tablaProductos.getColumnModel().getColumn(i).setCellRenderer(AlinearM);
         }
         tablaProductos.setEnabled(false);
-        
-        
-
         sp3 = new JScrollPane(tablaProductos);
         sp3.setBounds(45, 80, 750, 570);
         sp3.setVisible(true);

@@ -133,7 +133,7 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
             tablacitas2.getColumnModel().getColumn(i).setCellRenderer(Alineard2);
         }
         tablacitas2.setEnabled(false);
-        sp2 = new JScrollPane(tablacitas);
+        sp2 = new JScrollPane(tablacitas2);
         sp2.setBounds(45, 160, 700, 240);
         sp2.setVisible(true);
         p2.add(sp2);
@@ -169,7 +169,6 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
             String fechita=(String)fecha.getSelectedItem();
             Proyecto1.doctores.get(Proyecto1.indice).getHorario().add(horariito);
             Proyecto1.doctores.get(Proyecto1.indice).getFecha().add(fechita);
-            Proyecto1.tablearHorario();
             JOptionPane.showMessageDialog(null, "Horario ingresado exitosamente","Nuevo horario ingresado",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             Proyecto1.refresD();

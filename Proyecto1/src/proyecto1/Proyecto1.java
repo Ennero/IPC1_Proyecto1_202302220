@@ -122,8 +122,8 @@ public class Proyecto1 {
     static boolean found;
 
     public static Object[][] tablearHorario() {
-        int fila = doctores.get(indice).getIndicePacientes().size();
-        Object[][] tableado = new Object[fila][6];
+        int fila = doctores.get(indice).getHorario().size();
+        Object[][] tableado = new Object[fila][3];
         for (int i = 0; i < fila; i++) {
             tableado[i][0] = i + 1;
             tableado[i][1] = doctores.get(indice).getHorario().get(i);
