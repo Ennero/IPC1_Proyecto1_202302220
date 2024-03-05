@@ -2,6 +2,7 @@ package proyecto1;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -27,7 +28,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class PacienteM extends JFrame implements ChangeListener, ActionListener, FocusListener {
 
-    JLabel titulodlbl, titulomlbl, horalbl, datelbl, doc, horariolbl;
+    JLabel titulodlbl, titulomlbl, doc, horariolbl;
     // JButton hace referencia a los botones
     JButton editarbtn, regresar, mostrarDbtn, mostrarHbtn, mostrarhorasbtn, generar, historialbtn;
     //JTabbedPane	
@@ -162,7 +163,60 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
         historialbtn.setFont(new Font(titulodlbl.getFont().getFontName(), Font.BOLD, 24));
         p2.add(historialbtn);
         historialbtn.addActionListener(this);
+        //*****************************************************************************************************************************************
 
+        titulomlbl = new JLabel("Mira nuestros nuevos productos y visita nuestra farmacia");
+        titulomlbl.setBounds(0, 0, 790, 50);
+        titulomlbl.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        this.titulomlbl.setOpaque(true);
+        titulomlbl.setVerticalAlignment(SwingConstants.CENTER);
+        titulomlbl.setHorizontalAlignment(SwingConstants.CENTER);
+        titulomlbl.setFont(new Font(titulomlbl.getFont().getFontName(), Font.BOLD, 24));
+        Font font1 = titulomlbl.getFont();
+        Map attributes1 = font1.getAttributes();
+        attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        titulomlbl.setFont(font.deriveFont(attributes));
+        titulomlbl.setVisible(true);
+        p3.add(titulomlbl);
+        
+        JPanel scroll=new JPanel();
+        scroll.setLayout(null);
+        int x = 0, y = 0;
+        int scrollalto = ((Proyecto1.productos.size() / 3) + 1) * 120;
+        int par=0;
+
+        for (int i = 0; i < Proyecto1.productos.size(); i++) {
+
+            Producto pTemp = new Producto(Proyecto1.productos.get(i).getCodigo(),Proyecto1.productos.get(i).getNombre(),Proyecto1.productos.get(i).getCantidad(),Proyecto1.productos.get(i).getDescripcion(),Proyecto1.productos.get(i).getPrecio());
+            if (par<1) {
+                x = 0;
+            } else if(par<2){
+                                x = 250;
+            }else{
+                x=500;
+            }
+            {
+            }
+            JPanel jpTemp = pTemp.getPanel();
+            jpTemp.setBounds(x, y, 230, 130);
+            jpTemp.setVisible(true);
+            scroll.add(jpTemp);
+            if (par>=2) {
+                y += 150;
+                par=-1;
+            }
+            par++;
+        }
+
+        scroll.setPreferredSize(new Dimension(775, scrollalto));
+        sp3 = new JScrollPane(scroll);
+        sp3.setBounds(5, 50, 775, 395);
+        sp3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        sp3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        p3.add(sp3);
+
+        
+        
         //******************************************************************************************************************************************
         this.setTitle("Paciente");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -197,7 +251,7 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
         }
         if (ae.getSource() == mostrarDbtn) {
             String especialidadita = (String) especialidad.getSelectedItem();
-            doctor.removeAllElements();;
+            doctor.removeAllElements();
             Proyecto1.buscaraldoc(especialidadita);
             doctoradd.setEnabled(true);
             especialidad.setEnabled(false);
