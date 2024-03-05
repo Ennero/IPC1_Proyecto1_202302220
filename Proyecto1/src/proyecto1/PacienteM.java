@@ -189,11 +189,11 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
 
             Producto pTemp = new Producto(Proyecto1.productos.get(i).getCodigo(),Proyecto1.productos.get(i).getNombre(),Proyecto1.productos.get(i).getCantidad(),Proyecto1.productos.get(i).getDescripcion(),Proyecto1.productos.get(i).getPrecio());
             if (par<1) {
-                x = 0;
+                x = 15;
             } else if(par<2){
-                                x = 250;
+                                x = 265;
             }else{
-                x=500;
+                x=515;
             }
             {
             }

@@ -79,7 +79,6 @@ public class Producto {
         lbl3.setVerticalAlignment(SwingConstants.CENTER);
         lbl3.setHorizontalAlignment(SwingConstants.CENTER);
         jp1.add(lbl3);
-        
 
         jp1.setVisible(true);
     }
