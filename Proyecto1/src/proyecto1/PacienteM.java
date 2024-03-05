@@ -36,8 +36,7 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
     //JPanels
     JPanel p1, p2, p3;
     //Atributos para la tabla
-    JTable tablaPacientes, tablaDoctores, tablaProductos;
-    JScrollPane sp1, sp2, sp3;
+    JScrollPane sp1, sp3;
     JTextArea motivo;
     JTable tablacitas;
     JComboBox date, time, especialidad, doctoradd;
@@ -305,13 +304,14 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
             String fech = (String) date.getSelectedItem();
             String hor = (String) time.getSelectedItem();
             Proyecto1.doctores.get(Proyecto1.posicion).getPaciente().add(nomecito);
-            Proyecto1.doctores.get(Proyecto1.posicion).getHorario().add(hor);
-            Proyecto1.doctores.get(Proyecto1.posicion).getFecha().add(fech);
             Proyecto1.doctores.get(Proyecto1.posicion).getIndicePacientes().add(Proyecto1.indice);
             Proyecto1.pacientes.get(Proyecto1.indice).getEstado().add("Pendiente");
             Proyecto1.pacientes.get(Proyecto1.indice).getFecha().add(fech);
             Proyecto1.pacientes.get(Proyecto1.indice).getHorario().add(hor);
             Proyecto1.pacientes.get(Proyecto1.indice).getMotivo().add(motivos);
+            JOptionPane.showMessageDialog(null,"Cita generada exitosamente","Cita creada",JOptionPane.INFORMATION_MESSAGE);
+            Proyecto1.nuevaCita(nomecito,hor,fech,Proyecto1.posicion,Proyecto1.indice,motivos);
+            
         }
         if (ae.getSource() == historialbtn) {
             String[] titulos_d = {"No.", "Estado", "Fecha", "Hora"};

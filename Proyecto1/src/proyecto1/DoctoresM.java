@@ -2,6 +2,7 @@
 package proyecto1;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -27,13 +28,13 @@ import javax.swing.table.TableColumnModel;
  */
 public class DoctoresM extends JFrame implements ChangeListener,ActionListener,FocusListener {
 
-    JLabel titulodlbl, tituloplbl, titulomlbl;
+    JLabel titulodlbl, tituloplbl, titulomlbl,lbl21,lbl22,lbl23,lbl24;
     // JButton hace referencia a los botones
     JButton editarbtn, btnm3,regresar,añadir;
     //JTabbedPane	
     JTabbedPane panel;
     //JPanels
-    JPanel p1, p2, p3;
+    JPanel p1, p2;
     //Atributos para la tabla
     JTable tablacitas,tablacitas2;
     JScrollPane sp1,sp2;
@@ -62,13 +63,52 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         this.add(regresar);
         //*********************************************************************************************************************************************
         
+        lbl21=new JLabel("Nombre Paciente");
+        lbl21.setFont(new Font("Arial", Font.BOLD, 16));
+        lbl21.setBounds(15, 0, 180, 50);
+        lbl21.setEnabled(false);
+        p1.add(lbl21);
         
+        lbl22=new JLabel("Hora Cita");
+        lbl22.setFont(new Font("Arial", Font.BOLD, 16));
+        lbl22.setBounds(265, 0, 180, 50);
+        lbl22.setEnabled(false);
+        p1.add(lbl22);
         
+        lbl23=new JLabel("Fecha hora");
+        lbl23.setFont(new Font("Arial", Font.BOLD, 16));
+        lbl23.setBounds(415, 0, 180, 50);
+        lbl23.setEnabled(false);
+        p1.add(lbl23);
         
+        lbl24=new JLabel("Acciones");
+        lbl24.setFont(new Font("Arial", Font.BOLD, 16));
+        lbl24.setBounds(615, 0, 180, 50);
+        lbl24.setEnabled(false);
+        p1.add(lbl24);
         
+        JPanel scroll=new JPanel();
+        scroll.setLayout(null);
+        int y = 0;
+        for (int i = 0; i < Proyecto1.citas.size(); i++) {
+            Citas pTemp=new Citas(Proyecto1.citas.get(i).getNombreP(),Proyecto1.citas.get(i).getHora(),Proyecto1.citas.get(i).getFecha(),Proyecto1.citas.get(i).getDoctor(),Proyecto1.citas.get(i).getPaciente(),Proyecto1.citas.get(i).getMotivo());
+            JPanel jpTemp = pTemp.getPanel();
+            jpTemp.setBounds(0, y, 770, 65);
+            jpTemp.setVisible(true);
+            scroll.add(jpTemp);
+            y=y+70;
+        }
+        scroll.setPreferredSize(new Dimension(780, 70));
+        sp1 = new JScrollPane(scroll);
+        sp1.setBounds(5, 50, 775, 395);
+        sp1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        sp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        p1.add(sp1);
         
-        
-        
+        //NOTAS
+        //SE CLONA EN LA LISTA CUANDO SE GENERA LA CITA
+        //POSIBLES PROBLEMAS CON EL TEMA DE ACTUALIZAR DATOS
+        //SE DUPLICA LA FECHA (OSEA QUE CUANDO SE GENERAN DOS, DE LA MISMA FECHA, APARECEN DOS Y NO SOLO UNO)
         
         
         

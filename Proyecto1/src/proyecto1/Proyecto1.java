@@ -30,6 +30,7 @@ public class Proyecto1 {
     static ArrayList<Persona> pacientes = new ArrayList<>();
     static ArrayList<Doctor> doctores = new ArrayList<>();
     static ArrayList<Producto> productos = new ArrayList<>();
+    static ArrayList<Citas> citas = new ArrayList<>();
 
     public static void refresD() {
         DoctoresM sdf = new DoctoresM();
@@ -283,6 +284,9 @@ public class Proyecto1 {
 
     static void nuevoProducto(String codigo, String nombre, int cantidad, String descripcion, String precio) {
         productos.add(new Producto(codigo, nombre, cantidad, descripcion, precio));
+    }
+    static void nuevaCita(String nombre, String hora, String fecha,int doctor, int paciente,String motivos) {
+        citas.add(new Citas(nombre,hora,fecha,doctor,paciente,motivos));
     }
 
 }
