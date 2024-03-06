@@ -210,8 +210,12 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         if(ae.getSource()==btnm3){
             String horariito=horariotxt.getText();
             String fechita=(String)fecha.getSelectedItem();
-            Proyecto1.doctores.get(Proyecto1.indice).getHorario().add(horariito);
-            Proyecto1.doctores.get(Proyecto1.indice).getFecha().add(fechita);
+            try{
+                Proyecto1.doctores.get(Proyecto1.indice).getHorario().add(horariito);
+                Proyecto1.doctores.get(Proyecto1.indice).getFecha().add(fechita);
+            }catch(Exception e){
+            }
+            
             JOptionPane.showMessageDialog(null, "Horario ingresado exitosamente","Nuevo horario ingresado",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             Proyecto1.refresD();
@@ -227,6 +231,7 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
             }
         }
         if(ae.getSource()==regresar){
+            JOptionPane.showMessageDialog(null, "Regresando a la pantalla de inicio","Regresando",JOptionPane.INFORMATION_MESSAGE);
             Inicio ini=new Inicio();
             this.dispose();
         }

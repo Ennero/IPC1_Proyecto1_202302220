@@ -210,6 +210,7 @@ public class Citas implements ActionListener {
             Proyecto1.citas.remove(Proyecto1.posicion);
             jp.setBackground(Color.red);
             this.atender.setEnabled(false);
+            this.rechazar.setEnabled(false);
         }
 
         if (ae.getSource() == this.atender) {
@@ -219,6 +220,7 @@ public class Citas implements ActionListener {
             Proyecto1.citas.remove(Proyecto1.posicion);
             jp.setBackground(Color.green);
             this.rechazar.setEnabled(false);
+            this.atender.setEnabled(false);
         }
 
     }

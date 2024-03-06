@@ -246,6 +246,7 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
         }
         if (ae.getSource() == regresar) {
             Inicio ini = new Inicio();
+            JOptionPane.showMessageDialog(null, "Regresando a la pantalla de inicio","Regresando",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
         if (ae.getSource() == mostrarDbtn) {

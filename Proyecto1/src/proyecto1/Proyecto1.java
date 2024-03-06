@@ -50,8 +50,8 @@ public class Proyecto1 {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         //ActualizarDatos a=new ActualizarDatos();
-        //Inicio inicio=new Inicio();
-        Admin registro = new Admin();
+        Inicio inicio=new Inicio();
+        //Admin registro = new Admin();
         //RegistroDoctores a=new RegistroDoctores();
         //Añadir a=new Añadir();
         //DoctoresM sdkfjh=new DoctoresM();

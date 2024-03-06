@@ -279,6 +279,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             if(Proyecto1.found==true){
                 Proyecto1.irAdmin=true;
                 Proyecto1.doctores.remove(Proyecto1.posicion);
+                JOptionPane.showMessageDialog(null, "Doctor eliminado exitosamente ","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
                 Admin aes=new Admin();
                 this.dispose();
             }else{
@@ -346,6 +347,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
         }
         if(ae.getSource()==regresar){
             Inicio aaa=new Inicio();
+            JOptionPane.showMessageDialog(null, "Regresando a la pantalla de inicio","Regresando",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
         
