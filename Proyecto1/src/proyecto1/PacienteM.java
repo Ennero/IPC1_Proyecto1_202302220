@@ -267,7 +267,6 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
             for (int j = 0; j < Proyecto1.doctores.get(Proyecto1.posicion).getFecha().size(); j++) {
                 if (j > 0) {
                     if (!(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j)).equals((date.getItemAt(pre)))) {
-
                         date.addItem(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j));
                         pre = j;
                     }
@@ -275,7 +274,6 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
                     date.addItem(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j));
                     pre = j;
                 }
-
             }
             date.setEnabled(true);
             mostrarHbtn.setEnabled(false);
@@ -309,8 +307,9 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
             Proyecto1.pacientes.get(Proyecto1.indice).getFecha().add(fech);
             Proyecto1.pacientes.get(Proyecto1.indice).getHorario().add(hor);
             Proyecto1.pacientes.get(Proyecto1.indice).getMotivo().add(motivos);
+            int id=Proyecto1.pacientes.get(Proyecto1.indice).getMotivo().size()-1;
             JOptionPane.showMessageDialog(null,"Cita generada exitosamente","Cita creada",JOptionPane.INFORMATION_MESSAGE);
-            Proyecto1.nuevaCita(nomecito,hor,fech,Proyecto1.posicion,Proyecto1.indice,motivos);
+            Proyecto1.nuevaCita(nomecito,hor,fech,Proyecto1.posicion,Proyecto1.indice,motivos,id);
             
         }
         if (ae.getSource() == historialbtn) {

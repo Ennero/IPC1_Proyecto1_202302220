@@ -1,4 +1,3 @@
-
 package proyecto1;
 
 import java.awt.Color;
@@ -26,35 +25,40 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class Citas implements ActionListener{
-    
-   private String nombreP, hora,fecha,motivo;
-   private int doctor, paciente;
+public class Citas implements ActionListener {
+
+    public static int lugar = 0;
+    private String nombreP, hora, fecha, motivo;
+    private int doctor, paciente, id, place;
     private JButton verMas;
     private JButton atender;
     private JButton rechazar;
     private JPanel jp;
-    private JLabel nombrelbl,horalbl,fechalbl;
+    private JLabel nombrelbl, horalbl, fechalbl;
 
-    public Citas(String nombreP, String hora, String fecha,int doctor,int paciente,String motivo) {
+    public Citas(String nombreP, String hora, String fecha, int doctor, int paciente, String motivo, int id) {
+        this.id = id;
         this.nombreP = nombreP;
         this.hora = hora;
         this.fecha = fecha;
-        this.doctor=doctor;
-        this.paciente=paciente;
-        this.motivo=motivo;
+        this.doctor = doctor;
+        this.paciente = paciente;
+        this.motivo = motivo;
         initComponents();
+        this.place = lugar;
+        lugar += 1;
     }
+
     public void initComponents() {
         jp = new JPanel();
         jp.setLayout(null);
-        jp.setBackground(Color.yellow); 
+        jp.setBackground(Color.yellow);
         jp.setPreferredSize(new Dimension(770, 70));
 
         // Calcular las coordenadas para centrar horizontalmente y verticalmente
         int ancholbl = 180;
         int altolbl = 50;
-        
+
         nombrelbl = new JLabel(this.getNombreP());
         nombrelbl.setFont(new Font("Arial", Font.BOLD, 14));
         nombrelbl.setForeground(Color.black);
@@ -70,7 +74,7 @@ public class Citas implements ActionListener{
         horalbl.setVerticalAlignment(SwingConstants.CENTER);
         horalbl.setHorizontalAlignment(SwingConstants.CENTER);
         jp.add(horalbl);
-        
+
         fechalbl = new JLabel(this.getFecha());
         fechalbl.setFont(new Font("Arial", Font.BOLD, 14));
         fechalbl.setForeground(Color.blue);
@@ -78,35 +82,34 @@ public class Citas implements ActionListener{
         fechalbl.setVerticalAlignment(SwingConstants.CENTER);
         fechalbl.setHorizontalAlignment(SwingConstants.CENTER);
         jp.add(fechalbl);
-        
-        verMas=new JButton("Ver Más");
+
+        verMas = new JButton("Ver Más");
         verMas.setBounds(540, 5, 65, altolbl);
         verMas.setVisible(true);
         verMas.setEnabled(true);
         verMas.addActionListener(this);
         jp.add(verMas);
-        
-        atender=new JButton("Atender");
+
+        atender = new JButton("Atender");
         atender.setBounds(610, 5, 65, altolbl);
         atender.setVisible(true);
         atender.setEnabled(true);
         atender.addActionListener(this);
         jp.add(atender);
-        
-        rechazar=new JButton("Rechazar");
+
+        rechazar = new JButton("Rechazar");
         rechazar.setBounds(680, 5, 72, altolbl);
         rechazar.setVisible(true);
         rechazar.setEnabled(true);
         rechazar.addActionListener(this);
         jp.add(rechazar);
-        
 
         jp.setVisible(true);
     }
-    public JPanel getPanel(){
+
+    public JPanel getPanel() {
         return jp;
     }
-    
 
     /**
      * @return the nombreP
@@ -193,13 +196,59 @@ public class Citas implements ActionListener{
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == this.verMas) {
+            String Motivote = Proyecto1.pacientes.get(this.paciente).getMotivo().get(getId());
+            String idade = Proyecto1.pacientes.get(this.paciente).getEdad();
+            String genro = Proyecto1.pacientes.get(this.paciente).getSexo();
+            JOptionPane.showMessageDialog(null, "Sexo: " + genro + ", Edad: " + idade + ", Motivo de la cita: " + Motivote, "Más información del paciente", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (ae.getSource() == this.rechazar) {
+            Proyecto1.pacientes.get(this.paciente).getEstado().set(this.id, "Rechazado");
+            JOptionPane.showMessageDialog(null, "Cita rechazada", "Cita rechazada", JOptionPane.INFORMATION_MESSAGE);
+            Proyecto1.buscarCitas(this.place);
+            Proyecto1.citas.remove(Proyecto1.posicion);
+            jp.setBackground(Color.red);
+            this.atender.setEnabled(false);
+        }
+
+        if (ae.getSource() == this.atender) {
+            Proyecto1.pacientes.get(this.paciente).getEstado().set(this.id, "Atendido");
+            JOptionPane.showMessageDialog(null, "Cita atendida", "Cita atendida", JOptionPane.INFORMATION_MESSAGE);
+            Proyecto1.buscarCitas(this.place);
+            Proyecto1.citas.remove(Proyecto1.posicion);
+            jp.setBackground(Color.green);
+            this.rechazar.setEnabled(false);
+        }
 
     }
 
-    
-   
-   
-    
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the place
+     */
+    public int getPlace() {
+        return place;
+    }
+
+    /**
+     * @param place the place to set
+     */
+    public void setPlace(int place) {
+        this.place = place;
+    }
+
 }

@@ -40,7 +40,7 @@ public class Proyecto1 {
     static int codigo = 1000;
     static boolean registro = false;
     static boolean irAdmin = true;
-    static int indice;
+    static int indice=0;
 
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public static void main(String[] args) {
@@ -119,7 +119,7 @@ public class Proyecto1 {
         }
         return tableado;
     }
-    static int posicion = 0;
+    static int posicion;
     static boolean found;
 
     public static Object[][] tablearHorario() {
@@ -199,11 +199,11 @@ public class Proyecto1 {
     public static void buscaraldoc(String espe) {
         for (int j = 0; j < doctores.size(); j++) {
             if (espe.equals(doctores.get(j).getEspecialidad())) {
-                PacienteM.doctor.addElement(doctores.get(j).getNombres() + " " + doctores.get(j).getApellidos());
+                PacienteM.doctor.addElement(doctores.get(j).getNombres());
             }
         }
     }
-
+//******************************************************************************************************************************************
     public static void buscardNombre(String nombre) {
         int encontrado = 0;
         for (int j = 0; j < doctores.size(); j++) {
@@ -273,6 +273,20 @@ public class Proyecto1 {
         }
         posicion = encontrado;
     }
+    
+    public static void buscarCitas(int lugar) {
+        int encontrado = 0;
+        for (int i = 0; i < citas.size(); i++) {
+            if (lugar == (citas.get(i).getPlace())) {
+                encontrado = i;
+                found = true;
+                break;
+            } else {
+                found = false;
+            }
+        }
+        posicion = encontrado;
+    }
 
     static void nuevaCuenta(String nombres, String apellidos, String contraseña, String edad, String genero, String codigo) {
         pacientes.add(new Persona(nombres, apellidos, contraseña, edad, genero, codigo));
@@ -285,8 +299,8 @@ public class Proyecto1 {
     static void nuevoProducto(String codigo, String nombre, int cantidad, String descripcion, String precio) {
         productos.add(new Producto(codigo, nombre, cantidad, descripcion, precio));
     }
-    static void nuevaCita(String nombre, String hora, String fecha,int doctor, int paciente,String motivos) {
-        citas.add(new Citas(nombre,hora,fecha,doctor,paciente,motivos));
+    static void nuevaCita(String nombre, String hora, String fecha,int doctor, int paciente,String motivos, int id) {
+        citas.add(new Citas(nombre,hora,fecha,doctor,paciente,motivos,id));
     }
 
 }

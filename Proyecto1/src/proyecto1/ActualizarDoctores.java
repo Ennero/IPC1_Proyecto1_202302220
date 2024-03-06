@@ -222,7 +222,6 @@ public class ActualizarDoctores extends JFrame implements FocusListener,ActionLi
             Proyecto1.doctores.get(Proyecto1.posicion).setEdad(edad);
             Proyecto1.doctores.get(Proyecto1.posicion).setSexo(genero);
             Proyecto1.doctores.get(Proyecto1.posicion).setContraseña(password);
-            Proyecto1.doctores.get(Proyecto1.posicion).setSexo(especialización);
             Proyecto1.doctores.get(Proyecto1.posicion).setContraseña(telefono);
             JOptionPane.showMessageDialog(null, "Actualizado exitosamente","Proceso exitoso",JOptionPane.INFORMATION_MESSAGE);
             if(Proyecto1.irAdmin==true){

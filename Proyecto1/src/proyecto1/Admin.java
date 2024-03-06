@@ -277,6 +277,7 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             String codigod=JOptionPane.showInputDialog("Ingrese el código del Doctor");
             Proyecto1.buscard(codigod);
             if(Proyecto1.found==true){
+                Proyecto1.irAdmin=true;
                 Proyecto1.doctores.remove(Proyecto1.posicion);
                 Admin aes=new Admin();
                 this.dispose();

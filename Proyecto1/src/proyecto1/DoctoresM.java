@@ -65,19 +65,19 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         
         lbl21=new JLabel("Nombre Paciente");
         lbl21.setFont(new Font("Arial", Font.BOLD, 16));
-        lbl21.setBounds(15, 0, 180, 50);
+        lbl21.setBounds(55, 0, 180, 50);
         lbl21.setEnabled(false);
         p1.add(lbl21);
         
         lbl22=new JLabel("Hora Cita");
         lbl22.setFont(new Font("Arial", Font.BOLD, 16));
-        lbl22.setBounds(265, 0, 180, 50);
+        lbl22.setBounds(235, 0, 180, 50);
         lbl22.setEnabled(false);
         p1.add(lbl22);
         
-        lbl23=new JLabel("Fecha hora");
+        lbl23=new JLabel("Fecha Cita");
         lbl23.setFont(new Font("Arial", Font.BOLD, 16));
-        lbl23.setBounds(415, 0, 180, 50);
+        lbl23.setBounds(410, 0, 180, 50);
         lbl23.setEnabled(false);
         p1.add(lbl23);
         
@@ -91,13 +91,16 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         scroll.setLayout(null);
         int y = 0;
         for (int i = 0; i < Proyecto1.citas.size(); i++) {
-            Citas pTemp=new Citas(Proyecto1.citas.get(i).getNombreP(),Proyecto1.citas.get(i).getHora(),Proyecto1.citas.get(i).getFecha(),Proyecto1.citas.get(i).getDoctor(),Proyecto1.citas.get(i).getPaciente(),Proyecto1.citas.get(i).getMotivo());
-            JPanel jpTemp = pTemp.getPanel();
-            jpTemp.setBounds(0, y, 770, 65);
-            jpTemp.setVisible(true);
-            scroll.add(jpTemp);
-            y=y+70;
-        }
+            
+            if(Proyecto1.citas.get(i).getDoctor()==Proyecto1.indice){
+                Citas pTemp=new Citas(Proyecto1.citas.get(i).getNombreP(),Proyecto1.citas.get(i).getHora(),Proyecto1.citas.get(i).getFecha(),Proyecto1.citas.get(i).getDoctor(),Proyecto1.citas.get(i).getPaciente(),Proyecto1.citas.get(i).getMotivo(),Proyecto1.citas.get(i).getId());
+                JPanel jpTemp = pTemp.getPanel();
+                jpTemp.setBounds(0, y, 770, 65);
+                jpTemp.setVisible(true);
+                  scroll.add(jpTemp);
+                 y=y+70;
+            }
+                    }
         scroll.setPreferredSize(new Dimension(780, 70));
         sp1 = new JScrollPane(scroll);
         sp1.setBounds(5, 50, 775, 395);
@@ -229,7 +232,10 @@ public class DoctoresM extends JFrame implements ChangeListener,ActionListener,F
         }
         if(ae.getSource()==añadir){
             String dia=JOptionPane.showInputDialog("Ingrese la nueva fecha");
+            if(!dia.equals("")){
             date.addItem(dia);
+        }
+
         }
 
     }
