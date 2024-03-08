@@ -245,8 +245,8 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
             }
         }
         if (ae.getSource() == regresar) {
-            Inicio ini = new Inicio();
             JOptionPane.showMessageDialog(null, "Regresando a la pantalla de inicio","Regresando",JOptionPane.INFORMATION_MESSAGE);
+            Inicio ini = new Inicio();
             this.dispose();
         }
         if (ae.getSource() == mostrarDbtn) {
@@ -265,7 +265,17 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
             Proyecto1.buscardNombre(nombrecito);
             int pre = 0;
             date.removeAllItems();
-            for (int j = 0; j < Proyecto1.doctores.get(Proyecto1.posicion).getFecha().size(); j++) {
+            if(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().size()==0){
+                JOptionPane.showMessageDialog(null,"Este doctor no tiene horarios creado","Cita no creada",JOptionPane.INFORMATION_MESSAGE);
+                mostrarDbtn.setEnabled(false);
+                doctoradd.setEnabled(false);
+                especialidad.setEnabled(true);
+                mostrarDbtn.setEnabled(true);
+                doc.setEnabled(false);
+                mostrarHbtn.setEnabled(false);
+                motivo.setEnabled(true);
+            }else{
+                for (int j = 0; j < Proyecto1.doctores.get(Proyecto1.posicion).getFecha().size(); j++) {
                 if (j > 0) {
                     if (!(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j)).equals((date.getItemAt(pre)))) {
                         date.addItem(Proyecto1.doctores.get(Proyecto1.posicion).getFecha().get(j));
@@ -281,6 +291,8 @@ public class PacienteM extends JFrame implements ChangeListener, ActionListener,
             doctoradd.setEnabled(false);
             horariolbl.setEnabled(true);
             mostrarhorasbtn.setEnabled(true);
+            }
+            
         }
 
         if (ae.getSource() == mostrarhorasbtn) {

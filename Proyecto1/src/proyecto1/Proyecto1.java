@@ -5,7 +5,7 @@ package proyecto1;
  * @author Enner
  */
 import java.awt.Font;
-import java.awt.Color;
+import java.awt.Color;//Toda clase que no usé la dejo por cualquier cosa porque netBeans es mañoso
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -17,10 +17,10 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.ColorUIResource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Collections;
+import java.util.HashMap;//Para la organización de la tabla de especialidades y porque tiene indexado :)
+import java.util.List;//Lo meti por cualquier cosa porque NetBeans 
+import java.util.Map;//Por lagun motivo también lo necesito junto al hashMap
+import java.util.Collections;//para ordenar con sort
 
 public class Proyecto1 {
 

@@ -346,8 +346,8 @@ public class Admin extends JFrame implements ActionListener, ChangeListener {
             }
         }
         if(ae.getSource()==regresar){
-            Inicio aaa=new Inicio();
             JOptionPane.showMessageDialog(null, "Regresando a la pantalla de inicio","Regresando",JOptionPane.INFORMATION_MESSAGE);
+            Inicio aaa=new Inicio();
             this.dispose();
         }
         

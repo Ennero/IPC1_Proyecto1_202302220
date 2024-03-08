@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * @author Enner
  */
 public class Persona {
-
     private String nombres, apellidos, contraseña, codigo,edad, sexo;
     private ArrayList<String> horario=new ArrayList<>();
     private ArrayList<String> fecha=new ArrayList<>();
