@@ -1,68 +1,37 @@
-<div align="center">
+# Gestión de pacientes, doctores y citas en Java Swing
 
-# 🕹️ Complete 2D Strategy & Simulation Game in Java (IPC1)
+Aplicación académica de gestión clínica con interfaces para pacientes, doctores y administración, registro de productos y consulta de citas. Usa Swing y gráficas JFreeChart.
 
-**Juego 2D de estrategia y lógica por turnos en Java con interfaz gráfica, gestión de tableros, jugadores y reportes.**
+## Requisitos
 
-[![Language](https://img.shields.io/badge/Language-Java-blue?style=for-the-badge)](https://github.com/Ennero/IPC1_Proyecto1_202302220)
-[![Course](https://img.shields.io/badge/Course-Introducción%20a%20la%20Programación%20y%20Computación%201-003366?style=for-the-badge)](https://ingenieria.usac.edu.gt/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+JDK 21 y Maven. Se conserva la estructura NetBeans original; el pom.xml permite resolver JFreeChart/JCommon sin depender de la carpeta Downloads de una computadora.
 
-</div>
+## Ejecución
 
----
+Los comandos parten de la raíz del repositorio, salvo donde se indica otra terminal.
 
-
-## 📌 Descripción General
-
-Este repositorio contiene la implementación y entrega de **🕹️ Complete 2D Strategy & Simulation Game in Java (IPC1)**, desarrollado en el curso de **Introducción a la Programación y Computación 1** en la Universidad de San Carlos de Guatemala.
-
-- **Objetivo:** Juego 2D de estrategia y lógica por turnos en Java con interfaz gráfica, gestión de tableros, jugadores y reportes.
-- **Stack Principal:** `Java`.
-- **Área:** Ciencias de la Computación, Algoritmos y Desarrollo de Software.
-
----
-
-## 🚀 Características y Componentes
-
-- Implementación modular y buenas prácticas de codificación.
-- Manejo estructurado de datos, control de flujo y validaciones.
-- Documentación y scripts de soporte para compilación o ejecución.
-
----
-
-## 📦 Estructura del Proyecto
-
-```
-IPC1_Proyecto1_202302220/
-├── src/ o archivos de código fuente
-├── docs/ (si aplica)
-├── .gitignore
-├── LICENSE
-└── README.md
+```bash
+cd Proyecto1
+mvn compile
+mvn exec:java
 ```
 
----
+## Recorrido de demostración
 
-## ⚙️ Requisitos y Ejecución
+La clase principal proyecto1.Proyecto1 abre Inicio. Usar los formularios de registro y los paneles para consultar doctores, productos y citas. Los datos de esta entrega se mantienen en las estructuras de la aplicación.
 
-1. Clonar el repositorio:
-   ```bash
-   git clone https://github.com/Ennero/IPC1_Proyecto1_202302220.git
-   cd IPC1_Proyecto1_202302220
-   ```
-2. Ejecutar según el entorno (`Java`):
-   - Consultar los scripts o archivos principales del proyecto para parámetros específicos.
+## Organización
 
----
+Carpetas de la entrega: [`Proyecto1/`](Proyecto1/).
 
-## 📄 Licencia
+## Alcance y límites
 
-Este proyecto está bajo la Licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Es una demostración académica con almacenamiento en memoria; no es un sistema clínico para uso con datos reales. No implementa un juego 2D. El tema visual JTattoo es opcional: Swing conserva un tema disponible si no está instalado.
 
----
+## Contexto y licencia
 
-## 👨‍💻 Autor
+Trabajo académico o de aprendizaje conservado en el portafolio de [Enner Mendizabal](https://github.com/Ennero). Los créditos de los trabajos en grupo se conservan en sus entregas y manuales.
 
-- **Enner Mendizabal** - [@Ennero](https://github.com/Ennero)  
-- *Facultad de Ingeniería, Universidad de San Carlos de Guatemala.*
+Consultar [LICENSE](LICENSE) para la licencia de la raíz. Las dependencias y los componentes con avisos o licencias propios conservan sus condiciones.
+
+Para usar el proyecto Ant/NetBeans original, ejecutar primero `mvn dependency:copy-dependencies` desde Proyecto1. Las referencias de bibliotecas ahora apuntan a target/dependency, sin rutas de Downloads. El flujo principal de esta guía usa Maven.
